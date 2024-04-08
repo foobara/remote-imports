@@ -6,33 +6,31 @@ module Foobara
       depends_on ImportDomain
 
       def find_manifests_to_import
-        types = root_manifest.types
-
-        domains = types.map(&:domain).uniq
-        [*domains, *types]
+        root_manifest.types
       end
 
       def import_object_from_manifest
-        if manifest_to_import.is_a?(Manifest::Type)
-          manifest_to_import
-        else
-          subcommand = case manifests_to_import
-                       when Manifest::Domain
-                         ImportDomain
-                       when Manifest::Type
-                         ImportType
-                       end
+        domain_manifest = manifest_to_import.domain
 
-          if subcommand
-            run_subcommand!(
-              subcommand,
-              raw_manifest: manifest_data,
-              to_import: manifest_to_import.reference,
-              already_imported:
-            )
-          else
-            raise "Not sure how to import #{manifest_to_import}"
-          end
+        run_subcommand!(
+          ImportDomain,
+          raw_manifest: manifest_data,
+          to_import: domain_manifest.reference,
+          already_imported:
+        )
+
+        existing_type = Foobara.foobara_root_namespace.foobara_lookup_type(
+          manifest_to_import.reference,
+          mode: Namespace::LookupMode::ABSOLUTE
+        )
+
+        unless existing_type
+          domain = Foobara.foobara_root_namespace.foobara_lookup_domain!(
+            manifest_to_import.domain.reference,
+            mode: Namespace::LookupMode::ABSOLUTE
+          )
+
+          domain.foobara_register_type(manifest_to_import.scoped_short_name, manifest_to_import.declaration_data)
         end
       end
     end
