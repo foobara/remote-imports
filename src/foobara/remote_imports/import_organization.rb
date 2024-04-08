@@ -1,10 +1,12 @@
+require_relative "import_base"
+
 module Foobara
   module RemoteImports
     class ImportOrganization < Command
       include ImportBase
 
       def find_manifests_to_import
-         root_manifest.organizations
+        root_manifest.organizations
       end
 
       def import_object_from_manifest(manifest)

@@ -3,7 +3,7 @@ require "digest/md5"
 module Foobara
   module RemoteImports
     module ImportBase
-      class BadManifestInputs < RuntimeError
+      class BadManifestInputsError < RuntimeError
         class << self
           def context_type_declaration
             {}
@@ -11,7 +11,8 @@ module Foobara
         end
       end
 
-      class NotFound < RuntimeError
+      # TODO: why do we need this Value:: prefix?
+      class NotFoundError < Value::DataError
         class << self
           def context_type_declaration
             { not_found: [:string] }
@@ -21,16 +22,23 @@ module Foobara
 
       class << self
         def included(klass)
-          cat = klass.name.match(/Import(\w+)$/)[1]
-          klass.category = Util.underscore_sym(cat)
+          category = klass.name.match(/Import(\w+)$/)[1]
+          category = Util.underscore_sym(category)
+
+          klass.singleton_class.define_method :category do
+            category
+          end
+
+          klass.possible_input_error :to_import, NotFoundError
+          klass.possible_error BadManifestInputsError
 
           klass.inputs(
             manifest_url: :string,
-            raw_manifest: :string,
-            cache: {type: :boolean, default: true},
-            cache_path: {type: :string, default: "tmp/cache/foobara-remote-imports"},
+            raw_manifest: :associative_array,
+            cache: { type: :boolean, default: true },
+            cache_path: { type: :string, default: "tmp/cache/foobara-remote-imports" },
             to_import: :duck,
-            already_imported: {type: :duck, :allow_nil}
+            already_imported: { type: :duck, allow_nil: true }
           )
 
           klass.result :duck
@@ -39,7 +47,8 @@ module Foobara
 
       def execute
         load_manifest
-        cache_manifest
+
+        cache_manifest if should_cache?
         determine_manifests_to_import
         filter_manifests_to_import
         import_objects_from_manifests
@@ -88,7 +97,7 @@ module Foobara
                           response.body
                         else
                           raise "Could not get manifest from #{url}: " \
-                                  "#{response.code} #{response.message}"
+                                "#{response.code} #{response.message}"
                         end
 
         JSON.parse(manifest_json)
@@ -102,7 +111,7 @@ module Foobara
         not_found = filter - manifests_to_import.map(&:reference)
 
         if not_found.any?
-          add_input_error :to_import, :organization_not_found, not_found:
+          add_input_error :to_import, :not_found, "Could not find #{not_found}", not_found:
         end
 
         self.manifests_to_import = manifests_to_import.select do |manifest|
@@ -115,10 +124,12 @@ module Foobara
       end
 
       def cache_manifest
-        if cache
-          FileUtils.mkdir_p(cache_path)
-          File.write(cache_file_path, manifest_data.to_json)
-        end
+        FileUtils.mkdir_p(cache_path)
+        File.write(cache_file_path, manifest_data.to_json)
+      end
+
+      def should_cache?
+        cache && manifest_url && !cached?
       end
 
       def cached?
@@ -131,11 +142,11 @@ module Foobara
 
       def cache_key
         @cache_key ||= begin
-                         hash = Digest::MD5.hexdigest(manifest_url)
-                         escaped_url = manifest_url.gsub(/[^\w]/, "_")
+          hash = Digest::MD5.hexdigest(manifest_url)
+          escaped_url = manifest_url.gsub(/[^\w]/, "_")
 
-                         "#{hash}_#{escaped_url}"
-                       end
+          "#{hash}_#{escaped_url}"
+        end
       end
 
       def cache_file_path

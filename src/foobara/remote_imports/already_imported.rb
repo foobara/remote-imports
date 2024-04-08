@@ -10,7 +10,7 @@ module Foobara
       end
 
       def to_key(manifest)
-       [manifest.category.to_sym, manifest.reference.to_sym]
+        [manifest.path.first.to_sym, manifest.reference.to_sym]
       end
 
       def already_imported?(manifest)

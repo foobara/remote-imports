@@ -1,3 +1,6 @@
+require_relative "import_domain"
+require_relative "import_type"
+
 module Foobara
   module RemoteImports
     class ImportCommand < Command
