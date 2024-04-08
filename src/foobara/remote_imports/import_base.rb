@@ -56,7 +56,7 @@ module Foobara
         imported_objects
       end
 
-      attr_accessor :manifest_data, :imported_objects, :manifests_to_import
+      attr_accessor :manifest_data, :manifests_to_import, :manifest_to_import
 
       def validate
         super
@@ -164,13 +164,14 @@ module Foobara
       def import_objects_from_manifests
         manifests_to_import.each do |manifest|
           unless already_imported.already_imported?(manifest)
-            imported_objects << import_object_from_manifest(manifest)
+            self.manifest_to_import = manifest
+            imported_objects << import_object_from_manifest
             already_imported << manifest
           end
         end
       end
 
-      def import_object_from_manifest(manifest)
+      def import_object_from_manifest
         raise "subclass responsibility"
       end
 

@@ -1,4 +1,4 @@
-RSpec.describe Foobara::RemoteImports::ImportOrganization do
+RSpec.describe Foobara::RemoteImports::ImportDomain do
   after do
     Object.send(:remove_const, :SomeOrg) if Object.const_defined?(:SomeOrg)
   end
@@ -15,16 +15,17 @@ RSpec.describe Foobara::RemoteImports::ImportOrganization do
       to_import:
     }
   end
-  let(:to_import) { "SomeOrg" }
+  let(:to_import) { "SomeOrg::Math" }
   let(:raw_manifest) { JSON.parse(manifest_json) }
   let(:manifest_json) { File.read("#{__dir__}/../../fixtures/foobara-manifest.json") }
 
-  it "is successful" do
+  it "is creates the org and domain" do
     expect {
       expect(outcome).to be_success
     }.to change { Object.const_defined?(:SomeOrg) }
 
-    expect(result).to eq([SomeOrg])
+    expect(result).to eq([SomeOrg::Math])
     expect(SomeOrg).to be_foobara_organization
+    expect(SomeOrg::Math).to be_foobara_domain
   end
 end

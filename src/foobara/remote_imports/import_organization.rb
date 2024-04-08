@@ -9,8 +9,8 @@ module Foobara
         root_manifest.organizations
       end
 
-      def import_object_from_manifest(manifest)
-        Organization.create(manifest.reference)
+      def import_object_from_manifest
+        Organization.create(manifest_to_import.reference)
       end
     end
   end
