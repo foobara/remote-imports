@@ -16724,7 +16724,125 @@
     }
   },
   "error": {
+    "Foobara::Entity::NotFoundError": {
+      "base_error": "Foobara::RuntimeError",
+      "category": "runtime",
+      "context_type_declaration": {
+        "element_type_declarations": {
+          "criteria": {
+            "type": "duck"
+          },
+          "data_path": {
+            "type": "string"
+          },
+          "entity_class": {
+            "type": "string"
+          }
+        },
+        "type": "attributes"
+      },
+      "domain": "global_organization::global_domain",
+      "is_fatal": true,
+      "organization": "global_organization",
+      "parent": [
+        "organization",
+        "Foobara"
+      ],
+      "reference": "Foobara::Entity::NotFoundError",
+      "scoped_category": "error",
+      "scoped_full_name": "Foobara::Entity::NotFoundError",
+      "scoped_full_path": [
+        "Foobara",
+        "Entity",
+        "NotFoundError"
+      ],
+      "scoped_name": "Entity::NotFoundError",
+      "scoped_path": [
+        "Entity",
+        "NotFoundError"
+      ],
+      "scoped_prefix": [
+        "Entity"
+      ],
+      "scoped_short_name": "NotFoundError",
+      "symbol": "not_found",
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "string",
+        "symbol"
+      ]
+    },
+    "Foobara::RuntimeError": {
+      "abstract": true,
+      "category": "runtime",
+      "domain": "global_organization::global_domain",
+      "is_fatal": true,
+      "organization": "global_organization",
+      "parent": [
+        "organization",
+        "Foobara"
+      ],
+      "reference": "Foobara::RuntimeError",
+      "scoped_category": "error",
+      "scoped_full_name": "Foobara::RuntimeError",
+      "scoped_full_path": [
+        "Foobara",
+        "RuntimeError"
+      ],
+      "scoped_name": "RuntimeError",
+      "scoped_path": [
+        "RuntimeError"
+      ],
+      "scoped_prefix": null,
+      "scoped_short_name": "RuntimeError",
+      "symbol": "runtime"
+    },
+    "Foobara::Value::DataError": {
+      "category": "data",
+      "context_type_declaration": {
+        "element_type_declarations": {
+          "attribute_name": {
+            "type": "symbol"
+          },
+          "value": {
+            "type": "duck"
+          }
+        },
+        "type": "attributes"
+      },
+      "domain": "Foobara::Value",
+      "is_fatal": false,
+      "organization": "Foobara",
+      "parent": [
+        "domain",
+        "Foobara::Value"
+      ],
+      "reference": "Foobara::Value::DataError",
+      "scoped_category": "error",
+      "scoped_full_name": "Foobara::Value::DataError",
+      "scoped_full_path": [
+        "Foobara",
+        "Value",
+        "DataError"
+      ],
+      "scoped_name": "DataError",
+      "scoped_path": [
+        "DataError"
+      ],
+      "scoped_prefix": null,
+      "scoped_short_name": "DataError",
+      "symbol": "data",
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "symbol"
+      ]
+    },
     "Foobara::Value::Processor::Casting::CannotCastError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -16772,6 +16890,7 @@
       ]
     },
     "GlobalError": {
+      "base_error": "Foobara::RuntimeError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -16806,6 +16925,7 @@
       ]
     },
     "NestedModels3::FindNested::OuterEntityNotFoundError": {
+      "base_error": "Foobara::Entity::NotFoundError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -16852,6 +16972,7 @@
       ]
     },
     "NestedModels3::FindNestedButPutInAttributes::OuterEntityNotFoundError": {
+      "base_error": "Foobara::Entity::NotFoundError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -16898,6 +17019,7 @@
       ]
     },
     "NestedModels3::FindOuterModelForOuterEntity::OuterEntityNotFoundError": {
+      "base_error": "Foobara::Entity::NotFoundError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -16944,6 +17066,7 @@
       ]
     },
     "SomeOrg::Auth::CreateReferral::BadReferralError": {
+      "base_error": "Foobara::RuntimeError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -16992,6 +17115,7 @@
       ]
     },
     "SomeOrg::Math::CalculateExponent::NegativeExponentError": {
+      "base_error": "Foobara::RuntimeError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17033,6 +17157,7 @@
       ]
     },
     "SomeOtherOrg::Auth::CreateReferral::BadReferralError": {
+      "base_error": "Foobara::RuntimeError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17081,6 +17206,7 @@
       ]
     },
     "SomeOtherOrg::Math::CalculateExponent::NegativeExponentError": {
+      "base_error": "Foobara::RuntimeError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17122,6 +17248,7 @@
       ]
     },
     "SomeOtherOrg::SomeOtherAuth::CreateReferral::BadReferralError": {
+      "base_error": "Foobara::RuntimeError",
       "category": "runtime",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17170,6 +17297,7 @@
       ]
     },
     "array::SupportedValidators::Size::IncorrectTupleSizeError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17217,6 +17345,7 @@
       ]
     },
     "attributes::SupportedProcessors::ElementTypeDeclarations::UnexpectedAttributesError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17266,6 +17395,7 @@
       ]
     },
     "attributes::SupportedValidators::Required::MissingRequiredAttributeError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17306,6 +17436,7 @@
       ]
     },
     "duck::SupportedValidators::OneOf::ValueNotValidError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17352,6 +17483,7 @@
       ]
     },
     "email::Validators::CannotExceed64Characters::CannotExceed64CharactersError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17398,6 +17530,7 @@
       ]
     },
     "email::Validators::CannotHaveMultipleAtSigns::CannotHaveMultipleAtSignsError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17444,6 +17577,7 @@
       ]
     },
     "email::Validators::DomainCannotStartWithOrEndWithAHyphen::DomainCannotStartWithOrEndWithAHyphenError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17490,6 +17624,7 @@
       ]
     },
     "email::Validators::FirstPartCannotBeEmpty::FirstPartCannotBeEmptyError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17536,6 +17671,7 @@
       ]
     },
     "email::Validators::FirstPartCannotStartWithOrEndWithADotOrHaveTwoDotsInARow::FirstPartCannotStartWithOrEndWithADotOrHaveTwoDotsInARowError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17582,6 +17718,7 @@
       ]
     },
     "email::Validators::FirstPartHasBadCharacters::FirstPartHasBadCharactersError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17628,6 +17765,7 @@
       ]
     },
     "email::Validators::MustHaveAnAtSign::MustHaveAnAtSignError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17674,6 +17812,7 @@
       ]
     },
     "email::Validators::SecondPartCannotBeEmpty::SecondPartCannotBeEmptyError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17720,6 +17859,7 @@
       ]
     },
     "email::Validators::SecondPartHasBadCharacters::SecondPartHasBadCharactersError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17766,6 +17906,7 @@
       ]
     },
     "number::SupportedValidators::Max::MaxExceededError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17810,6 +17951,7 @@
       ]
     },
     "number::SupportedValidators::Min::BelowMinimumError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17854,6 +17996,7 @@
       ]
     },
     "string::SupportedValidators::Matches::DoesNotMatchError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
@@ -17898,6 +18041,7 @@
       ]
     },
     "string::SupportedValidators::MaxLength::MaxLengthExceededError": {
+      "base_error": "Foobara::Value::DataError",
       "category": "data",
       "context_type_declaration": {
         "element_type_declarations": {
