@@ -1,4 +1,4 @@
-RSpec.describe Foobara::RemoteImports::ImportType do
+RSpec.describe Foobara::RemoteImports::ImportError do
   after do
     Foobara.reset_alls
     Object.send(:remove_const, :SomeOrg) if Object.const_defined?(:SomeOrg)
@@ -16,20 +16,20 @@ RSpec.describe Foobara::RemoteImports::ImportType do
       to_import:
     }
   end
-  let(:to_import) { "SomeOrg::Auth::User" }
+  let(:to_import) { "SomeOrg::Math::CalculateExponent::NegativeExponentError" }
   let(:raw_manifest) { JSON.parse(manifest_json) }
   let(:manifest_json) { File.read("#{__dir__}/../../fixtures/foobara-manifest.json") }
 
-  it "is creates the type, org, and domain" do
+  it "is creates the error" do
     expect {
       expect(outcome).to be_success
     }.to change { Object.const_defined?(:SomeOrg) }
 
     expect(result.size).to eq(1)
-    type = result.first
-    expect(type).to be_a(Foobara::Types::Type)
-    expect(type).to eq(SomeOrg::Auth::User.entity_type)
+    error = result.first
+    expect(error.superclass).to be(Foobara::RuntimeError)
+    expect(error).to eq(SomeOrg::Math::CalculateExponent::NegativeExponentError)
     expect(SomeOrg).to be_foobara_organization
-    expect(SomeOrg::Auth).to be_foobara_domain
+    expect(SomeOrg::Math).to be_foobara_domain
   end
 end

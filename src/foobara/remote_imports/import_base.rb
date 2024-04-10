@@ -73,6 +73,16 @@ module Foobara
         end
       end
 
+      def already_exists?
+        method = "foobara_lookup_#{manifest_to_import.scoped_category}"
+
+        Foobara.foobara_root_namespace.send(
+          method,
+          manifest_to_import.reference,
+          mode: Namespace::LookupMode::ABSOLUTE
+        )
+      end
+
       def already_imported
         inputs[:already_imported] || AlreadyImported.new
       end
@@ -165,6 +175,9 @@ module Foobara
         manifests_to_import.each do |manifest|
           unless already_imported.already_imported?(manifest)
             self.manifest_to_import = manifest
+
+            next if already_exists?
+
             imported_objects << import_object_from_manifest
             already_imported << manifest
           end
