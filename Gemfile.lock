@@ -1,6 +1,6 @@
 GIT
   remote: foobara
-  revision: 8d32b79146ce606cdadf33dc8493bdf1595647f9
+  revision: 022f61f27c9412d63dc28bcc094e0310d7f4a936
   branch: main
   specs:
     foobara (0.0.1)
@@ -181,7 +181,7 @@ GEM
       rubocop-capybara (~> 2.17)
       rubocop-factory_bot (~> 2.22)
       rubocop-rspec_rails (~> 2.28)
-    rubocop-rspec_rails (2.28.2)
+    rubocop-rspec_rails (2.28.3)
       rubocop (~> 1.40)
     ruby-prof (1.7.0)
     ruby-progressbar (1.13.0)
