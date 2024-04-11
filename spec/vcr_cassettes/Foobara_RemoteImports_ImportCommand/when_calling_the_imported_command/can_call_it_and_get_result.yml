@@ -1,0 +1,45 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9292/run/SomeOrg::Math::CalculateExponent
+    body:
+      encoding: UTF-8
+      string: '{"base":2,"exponent":3}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - localhost:9292
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - http://localhost:3000
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Content-Length:
+      - '1'
+      Server:
+      - WEBrick/1.8.1 (Ruby/3.2.2/2023-03-30)
+      Date:
+      - Thu, 11 Apr 2024 21:47:09 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: '8'
+  recorded_at: Thu, 11 Apr 2024 21:47:09 GMT
+recorded_with: VCR 6.2.0

@@ -66,10 +66,10 @@ module Foobara
       end
 
       def build_command
-        base_url = root_manifest.metadata["url"].gsub(/\/manifest$/, "")
+        url_base = root_manifest.metadata["url"].gsub(/\/manifest$/, "")
 
         RemoteCommand.subclass(
-          url: "#{base_url}/run/#{manifest_to_import.reference}",
+          url_base:,
           description: manifest_to_import.description,
           inputs: manifest_to_import.inputs_type.relevant_manifest,
           result: manifest_to_import.result_type.relevant_manifest,

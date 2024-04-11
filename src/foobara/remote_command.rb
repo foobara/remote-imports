@@ -2,10 +2,10 @@ module Foobara
   class RemoteCommand < Command
     # TODO: fill this out
     class << self
-      attr_accessor :url
+      attr_accessor :url_base
 
       def subclass(
-        url:,
+        url_base:,
         description:,
         inputs:,
         result:,
@@ -15,7 +15,7 @@ module Foobara
       )
         klass = Util.make_class_p(name, base)
 
-        klass.url = url
+        klass.url_base = url_base
         klass.description description
         klass.inputs inputs
         klass.result result
@@ -38,6 +38,77 @@ module Foobara
         end
 
         klass
+      end
+
+      def url
+        @url ||= "#{url_base}/run/#{name}"
+      end
+    end
+
+    def url
+      self.class.url
+    end
+
+    def execute
+      build_request_body
+      build_request_headers
+      # TODO: implement this for queries?
+      #      build_query_string
+      issue_http_request
+      parse_response
+
+      parsed_result
+    end
+
+    attr_accessor :request_body, :request_headers, :response, :response_body, :response_code, :parsed_result
+
+    def build_request_body
+      self.request_body = inputs
+    end
+
+    def build_request_headers
+      self.request_headers = {
+        "Content-Type" => "application/json"
+      }
+    end
+
+    def issue_http_request
+      url = URI.parse(self.url)
+      self.response = Net::HTTP.post(url, JSON.generate(request_body), request_headers)
+    end
+
+    def parse_response
+      self.response_body = response.body
+      self.response_code = response.code
+
+      if response.is_a?(Net::HTTPSuccess)
+        self.parsed_result = JSON.parse(response_body)
+      elsif response.code.start_with?("4")
+        errors = JSON.parse(response_body)
+        errors.each do |error|
+          case error["category"]
+          when "runtime"
+            e = add_runtime_error(
+              symbol: error["symbol"],
+              message: error["message"],
+              context: error["context"]
+            )
+            e.runtime_path = error["runtime_path"]
+          when "data"
+            add_input_error(
+              symbol: error["symbol"],
+              key: error["key"],
+              message: error["message"],
+              context: error["context"],
+              path: error["path"]
+            )
+          else
+            raise "Bad error category: #{error["category"]}"
+          end
+        end
+        halt!
+      else
+        raise UnexpectedError, "#{response.code} from #{url}: #{response.body}"
       end
     end
   end

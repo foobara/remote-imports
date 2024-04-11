@@ -101,4 +101,42 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
       expect(error).to be_a(Foobara::RemoteImports::ImportBase::BadManifestInputsError)
     end
   end
+
+  context "when calling the imported command", vcr: { record: :none } do
+    it "can call it and get result" do
+      expect {
+        expect(outcome).to be_success
+      }.to change { Object.const_defined?("SomeOrg::Math::CalculateExponent") }
+
+      remote_command = SomeOrg::Math::CalculateExponent.new(base: 2, exponent: 3)
+      remote_outcome = remote_command.run
+
+      expect(remote_outcome).to be_success
+      expect(remote_outcome.result).to be(8)
+    end
+
+    context "when there's an error" do
+      it "can call it and get the errors", vcr: { record: :none } do
+        expect {
+          expect(outcome).to be_success
+        }.to change { Object.const_defined?("SomeOrg::Math::CalculateExponent") }
+
+        remote_command = SomeOrg::Math::CalculateExponent.new(base: 2, exponent: -3)
+        remote_outcome = remote_command.run
+
+        expect(remote_outcome).to_not be_success
+        expect(remote_outcome.errors.size).to be(1)
+
+        error = remote_outcome.errors.first
+
+        expect(error).to be_a(SomeOrg::Math::CalculateExponent::NegativeExponentError)
+        expect(error.symbol).to be(:negative_exponent)
+        expect(error.key).to eq("runtime.negative_exponent")
+        expect(error.context).to eq(exponent: -3)
+        expect(error.message).to eq("Exponent cannot be negative")
+        expect(error.path).to eq([])
+        expect(error.runtime_path).to eq([])
+      end
+    end
+  end
 end
