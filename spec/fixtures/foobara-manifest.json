@@ -18087,6 +18087,10 @@
       ]
     }
   },
+  "metadata": {
+    "url": "http://localhost:9292/manifest",
+    "when": "2024-04-10 22:08:25 -0500"
+  },
   "organization": {
     "Foobara::Ai": {
       "domain": "global_organization::global_domain",
