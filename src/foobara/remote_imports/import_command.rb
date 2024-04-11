@@ -32,7 +32,7 @@ module Foobara
 
         Util.make_class_p(manifest_to_import.reference, RemoteCommand)
 
-        manifest_to_import.types_depended_on do |type|
+        manifest_to_import.types_depended_on.each do |type|
           run_subcommand!(
             ImportType,
             raw_manifest: manifest_data,

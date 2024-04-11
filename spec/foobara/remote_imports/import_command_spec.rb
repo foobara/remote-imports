@@ -32,4 +32,73 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
     expect(SomeOrg).to be_foobara_organization
     expect(SomeOrg::Math).to be_foobara_domain
   end
+
+  context "with bad manifest inputs" do
+    let(:inputs) { { to_import: } }
+
+    it "gives an error" do
+      expect(outcome).to_not be_success
+      expect(errors.size).to eq(1)
+
+      error = errors.first
+
+      expect(error).to be_a(Foobara::RemoteImports::ImportBase::BadManifestInputsError)
+    end
+  end
+
+  context "with a to_import that doesn't exist" do
+    let(:to_import) { "DoesNotExist" }
+
+    it "gives an error" do
+      expect(outcome).to_not be_success
+      expect(errors.size).to eq(1)
+
+      error = errors.first
+
+      expect(error).to be_a(Foobara::RemoteImports::ImportBase::NotFoundError)
+    end
+  end
+
+  context "when importing from a url" do
+    let(:inputs) do
+      {
+        manifest_url:,
+        to_import:
+      }
+    end
+    let(:manifest_url) do
+      "http://localhost:9292/manifest"
+    end
+
+    before do
+      command.cast_and_validate_inputs
+      FileUtils.rm_f(command.cache_file_path)
+    end
+
+    # To rerecord this, change from :none to :once and run playground-be with rackup
+    it "is success", vcr: { record: :none } do
+      expect(outcome).to be_success
+      # make sure loading from cache works fine as well
+      expect(described_class.run!(inputs.merge(cache: true))).to be_an(Array)
+    end
+  end
+
+  context "with both manifest data and url" do
+    let(:inputs) do
+      {
+        manifest_url: "http://localhost:9292/manifest",
+        raw_manifest:,
+        to_import:
+      }
+    end
+
+    it "is not success" do
+      expect(outcome).to_not be_success
+      expect(errors.size).to eq(1)
+
+      error = errors.first
+
+      expect(error).to be_a(Foobara::RemoteImports::ImportBase::BadManifestInputsError)
+    end
+  end
 end

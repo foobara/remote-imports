@@ -3,7 +3,8 @@ require "digest/md5"
 module Foobara
   module RemoteImports
     module ImportBase
-      class BadManifestInputsError < RuntimeError
+      # Why doesn't this automatically register the possible error??
+      class BadManifestInputsError < Foobara::RuntimeError
         class << self
           def context_type_declaration
             {}
@@ -22,13 +23,6 @@ module Foobara
 
       class << self
         def included(klass)
-          category = klass.name.match(/Import(\w+)$/)[1]
-          category = Util.underscore_sym(category)
-
-          klass.singleton_class.define_method :category do
-            category
-          end
-
           klass.possible_input_error :to_import, NotFoundError
           klass.possible_error BadManifestInputsError
 
@@ -66,10 +60,10 @@ module Foobara
       def validate_manifest
         if manifest_url
           if raw_manifest
-            add_input_error :raw_manifest, :bad_manifest_inputs, "Cannot provide both manifest_url and raw_manifest"
+            add_runtime_error :bad_manifest_inputs, "Cannot provide both manifest_url and raw_manifest"
           end
         elsif !raw_manifest
-          add_input_error :manifest_url, :bad_manifest_inputs, "Must provide either manifest_url or raw_manifest"
+          add_runtime_error :bad_manifest_inputs, "Must provide either manifest_url or raw_manifest"
         end
       end
 
@@ -90,7 +84,7 @@ module Foobara
       def load_manifest
         self.manifest_data = if raw_manifest
                                raw_manifest
-                             elsif cached?
+                             elsif cache && cached?
                                load_cached_manifest
                              else
                                load_manifest_from_url
@@ -98,20 +92,19 @@ module Foobara
       end
 
       def load_manifest_from_url
-        # TODO: introduce VCR to test the following elsif block
-        # :nocov:
         url = URI.parse(manifest_url)
         response = Net::HTTP.get_response(url)
 
         manifest_json = if response.is_a?(Net::HTTPSuccess)
                           response.body
                         else
+                          # :nocov:
                           raise "Could not get manifest from #{url}: " \
                                 "#{response.code} #{response.message}"
+                          # :nocov:
                         end
 
         JSON.parse(manifest_json)
-        # :nocov:
       end
 
       # TODO: feels like a command smell to pass manifests here... reconsider algorithm
@@ -168,7 +161,9 @@ module Foobara
       end
 
       def find_manifests_to_import
+        # :nocov:
         raise "subclass responsibility"
+        # :nocov:
       end
 
       def import_objects_from_manifests
@@ -185,7 +180,9 @@ module Foobara
       end
 
       def import_object_from_manifest
+        # :nocov:
         raise "subclass responsibility"
+        # :nocov:
       end
 
       def imported_objects

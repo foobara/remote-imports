@@ -26,7 +26,7 @@ module Foobara
           already_imported:
         )
 
-        manifest_to_import.types_depended_on do |type|
+        manifest_to_import.types_depended_on.each do |type|
           run_subcommand!(
             ImportType,
             raw_manifest: manifest_data,
@@ -44,7 +44,9 @@ module Foobara
         base_error = if base_error_name
                        Foobara.foobara_root_namespace.foobara_lookup_error!(base_error_name)
                      else
+                       # :nocov:
                        Foobara::Error
+                       # :nocov:
                      end
 
         Foobara::Error.subclass(

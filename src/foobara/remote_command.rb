@@ -35,9 +35,6 @@ module Foobara
           possible_error.prepend_path!(path)
 
           register_possible_error_class(possible_error)
-        rescue => e
-          binding.pry
-          raise
         end
 
         klass
