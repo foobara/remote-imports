@@ -762,6 +762,12 @@
                         "sms"
                       ],
                       "type": "symbol"
+                    },
+                    "roles": {
+                      "element_type_declaration": {
+                        "type": "SomeOrg::Auth::role_enum"
+                      },
+                      "type": "array"
                     }
                   },
                   "required": [
@@ -825,7 +831,7 @@
           },
           "symbol": "cannot_cast"
         },
-        "data.some_other_org_auth_user.cannot_cast": {
+        "data.some_other_org_axuth_user.cannot_cast": {
           "category": "data",
           "error": "Foobara::Value::Processor::Casting::CannotCastError",
           "key": "data.some_other_org_auth_user.cannot_cast",
@@ -13632,6 +13638,12 @@
                         "sms"
                       ],
                       "type": "symbol"
+                    },
+                    "roles": {
+                      "element_type_declaration": {
+                        "type": "SomeOrg::Auth::role_enum"
+                      },
+                      "type": "array"
                     }
                   },
                   "required": [
@@ -13701,6 +13713,12 @@
                         "sms"
                       ],
                       "type": "symbol"
+                    },
+                    "roles": {
+                      "element_type_declaration": {
+                        "type": "SomeOrg::Auth::role_enum"
+                      },
+                      "type": "array"
                     }
                   },
                   "required": [
@@ -13845,6 +13863,12 @@
           },
           "referring_user": {
             "type": "SomeOrg::Auth::User"
+          },
+          "roles": {
+            "element_type_declaration": {
+              "type": "SomeOrg::Auth::role_enum"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -13856,6 +13880,7 @@
       },
       "inputs_types_depended_on": [
         "SomeOrg::Auth::User",
+        "SomeOrg::Auth::role_enum",
         "array",
         "attributes",
         "duck",
@@ -13905,6 +13930,12 @@
                   },
                   "referring_user": {
                     "type": "SomeOrg::Auth::User"
+                  },
+                  "roles": {
+                    "element_type_declaration": {
+                      "type": "SomeOrg::Auth::role_enum"
+                    },
+                    "type": "array"
                   }
                 },
                 "required": [
@@ -14237,6 +14268,12 @@
                         "sms"
                       ],
                       "type": "symbol"
+                    },
+                    "roles": {
+                      "element_type_declaration": {
+                        "type": "SomeOrg::Auth::role_enum"
+                      },
+                      "type": "array"
                     }
                   },
                   "required": [
@@ -14252,6 +14289,62 @@
                 "name": "User",
                 "primary_key": "id",
                 "type": "entity"
+              }
+            }
+          },
+          "symbol": "cannot_cast"
+        },
+        "data.roles.#.cannot_cast": {
+          "category": "data",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "key": "data.roles.#.cannot_cast",
+          "path": [
+            "roles",
+            "#"
+          ],
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "one_of": [
+                  "admin",
+                  "user"
+                ],
+                "type": "symbol"
+              }
+            }
+          },
+          "symbol": "cannot_cast"
+        },
+        "data.roles.#.value_not_valid": {
+          "category": "data",
+          "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
+          "key": "data.roles.#.value_not_valid",
+          "path": [
+            "roles",
+            "#"
+          ],
+          "processor_manifest_data": {
+            "one_of": [
+              "admin",
+              "user"
+            ]
+          },
+          "symbol": "value_not_valid"
+        },
+        "data.roles.cannot_cast": {
+          "category": "data",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "key": "data.roles.cannot_cast",
+          "path": [
+            "roles"
+          ],
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "element_type_declaration": {
+                  "type": "SomeOrg::Auth::role_enum"
+                },
+                "type": "array"
               }
             }
           },
@@ -14290,6 +14383,12 @@
               },
               "referring_user": {
                 "type": "SomeOrg::Auth::User"
+              },
+              "roles": {
+                "element_type_declaration": {
+                  "type": "SomeOrg::Auth::role_enum"
+                },
+                "type": "array"
               }
             }
           },
@@ -14331,6 +14430,7 @@
       ],
       "types_depended_on": [
         "SomeOrg::Auth::User",
+        "SomeOrg::Auth::role_enum",
         "array",
         "attributes",
         "duck",
@@ -16581,7 +16681,8 @@
       "scoped_short_name": "Auth",
       "types": [
         "SomeOrg::Auth::Referral",
-        "SomeOrg::Auth::User"
+        "SomeOrg::Auth::User",
+        "SomeOrg::Auth::role_enum"
       ]
     },
     "SomeOrg::Math": {
@@ -18141,7 +18242,7 @@
   },
   "metadata": {
     "url": "http://localhost:9292/manifest",
-    "when": "2024-04-11 21:49:08 -0500"
+    "when": "2024-04-12 18:13:59 -0500"
   },
   "organization": {
     "Foobara::Ai": {
@@ -27978,6 +28079,12 @@
               "sms"
             ],
             "type": "symbol"
+          },
+          "roles": {
+            "element_type_declaration": {
+              "type": "SomeOrg::Auth::role_enum"
+            },
+            "type": "array"
           }
         },
         "required": [
@@ -28011,6 +28118,12 @@
                 "sms"
               ],
               "type": "symbol"
+            },
+            "roles": {
+              "element_type_declaration": {
+                "type": "SomeOrg::Auth::role_enum"
+              },
+              "type": "array"
             }
           },
           "required": [
@@ -28072,6 +28185,12 @@
                         "sms"
                       ],
                       "type": "symbol"
+                    },
+                    "roles": {
+                      "element_type_declaration": {
+                        "type": "SomeOrg::Auth::role_enum"
+                      },
+                      "type": "array"
                     }
                   },
                   "required": [
@@ -28133,6 +28252,7 @@
         "SomeOrg::Auth::User"
       ],
       "types_depended_on": [
+        "SomeOrg::Auth::role_enum",
         "array",
         "attributes",
         "duck",
@@ -28140,6 +28260,97 @@
         "entity",
         "integer",
         "string",
+        "symbol"
+      ]
+    },
+    "SomeOrg::Auth::role_enum": {
+      "base_type": "symbol",
+      "declaration_data": {
+        "one_of": [
+          "admin",
+          "user"
+        ],
+        "type": "symbol"
+      },
+      "description": null,
+      "domain": "SomeOrg::Auth",
+      "name": "Anonymous symbol extension",
+      "organization": "SomeOrg",
+      "parent": [
+        "domain",
+        "SomeOrg::Auth"
+      ],
+      "possible_errors": {
+        "data.cannot_cast": {
+          "category": "data",
+          "error": "Foobara::Value::Processor::Casting::CannotCastError",
+          "key": "data.cannot_cast",
+          "processor_class": "Foobara::Value::Processor::Casting",
+          "processor_manifest_data": {
+            "casting": {
+              "cast_to": {
+                "one_of": [
+                  "admin",
+                  "user"
+                ],
+                "type": "symbol"
+              }
+            }
+          },
+          "symbol": "cannot_cast"
+        },
+        "data.value_not_valid": {
+          "category": "data",
+          "error": "duck::SupportedValidators::OneOf::ValueNotValidError",
+          "key": "data.value_not_valid",
+          "processor_class": "duck::SupportedValidators::OneOf",
+          "processor_manifest_data": {
+            "one_of": [
+              "admin",
+              "user"
+            ]
+          },
+          "symbol": "value_not_valid"
+        }
+      },
+      "processors": {
+        "caster_classes": [
+          "symbol::Casters::String"
+        ],
+        "casters": [
+          "symbol::Casters::string"
+        ],
+        "validator_classes": [
+          "duck::SupportedValidators::OneOf"
+        ]
+      },
+      "reference": "SomeOrg::Auth::role_enum",
+      "scoped_category": "type",
+      "scoped_full_name": "SomeOrg::Auth::role_enum",
+      "scoped_full_path": [
+        "SomeOrg",
+        "Auth",
+        "role_enum"
+      ],
+      "scoped_name": "role_enum",
+      "scoped_path": [
+        "role_enum"
+      ],
+      "scoped_prefix": null,
+      "scoped_short_name": "role_enum",
+      "supported_casters": [
+        "duck::SupportedCasters::AllowNil"
+      ],
+      "supported_validators": [
+        "duck::SupportedValidators::OneOf"
+      ],
+      "target_classes": [
+        "Symbol"
+      ],
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
         "symbol"
       ]
     },
