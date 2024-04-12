@@ -262,9 +262,9 @@
             "casting": {
               "cast_to": {
                 "one_of": [
+                  "claude-3-haiku-20240307",
                   "claude-3-opus-20240229",
-                  "claude-3-sonnet-20240229",
-                  "claude-3-haiku-20240307"
+                  "claude-3-sonnet-20240229"
                 ],
                 "type": "string"
               }
@@ -281,9 +281,9 @@
           ],
           "processor_manifest_data": {
             "one_of": [
+              "claude-3-haiku-20240307",
               "claude-3-opus-20240229",
-              "claude-3-sonnet-20240229",
-              "claude-3-haiku-20240307"
+              "claude-3-sonnet-20240229"
             ]
           },
           "symbol": "value_not_valid"
@@ -14410,6 +14410,16 @@
           },
           "symbol": "missing_required_attribute"
         },
+        "data.base.negative_base": {
+          "category": "data",
+          "error": "SomeOrg::Math::CalculateExponent::NegativeBaseError",
+          "key": "data.base.negative_base",
+          "manually_added": true,
+          "path": [
+            "base"
+          ],
+          "symbol": "negative_base"
+        },
         "data.cannot_cast": {
           "category": "data",
           "error": "Foobara::Value::Processor::Casting::CannotCastError",
@@ -17114,6 +17124,48 @@
         "symbol"
       ]
     },
+    "SomeOrg::Math::CalculateExponent::NegativeBaseError": {
+      "base_error": "Foobara::Value::DataError",
+      "category": "data",
+      "context_type_declaration": {
+        "element_type_declarations": {
+          "base": {
+            "type": "integer"
+          }
+        },
+        "type": "attributes"
+      },
+      "domain": "SomeOrg::Math",
+      "is_fatal": false,
+      "organization": "SomeOrg",
+      "parent": [
+        "command",
+        "SomeOrg::Math::CalculateExponent"
+      ],
+      "reference": "SomeOrg::Math::CalculateExponent::NegativeBaseError",
+      "scoped_category": "error",
+      "scoped_full_name": "SomeOrg::Math::CalculateExponent::NegativeBaseError",
+      "scoped_full_path": [
+        "SomeOrg",
+        "Math",
+        "CalculateExponent",
+        "NegativeBaseError"
+      ],
+      "scoped_name": "NegativeBaseError",
+      "scoped_path": [
+        "NegativeBaseError"
+      ],
+      "scoped_prefix": null,
+      "scoped_short_name": "NegativeBaseError",
+      "symbol": "negative_base",
+      "types_depended_on": [
+        "array",
+        "attributes",
+        "duck",
+        "integer",
+        "symbol"
+      ]
+    },
     "SomeOrg::Math::CalculateExponent::NegativeExponentError": {
       "base_error": "Foobara::RuntimeError",
       "category": "runtime",
@@ -18089,7 +18141,7 @@
   },
   "metadata": {
     "url": "http://localhost:9292/manifest",
-    "when": "2024-04-10 22:08:25 -0500"
+    "when": "2024-04-11 21:49:08 -0500"
   },
   "organization": {
     "Foobara::Ai": {
@@ -21120,9 +21172,9 @@
             "casting": {
               "cast_to": {
                 "one_of": [
+                  "claude-3-haiku-20240307",
                   "claude-3-opus-20240229",
-                  "claude-3-sonnet-20240229",
-                  "claude-3-haiku-20240307"
+                  "claude-3-sonnet-20240229"
                 ],
                 "type": "string"
               }
@@ -21158,9 +21210,9 @@
           ],
           "processor_manifest_data": {
             "one_of": [
+              "claude-3-haiku-20240307",
               "claude-3-opus-20240229",
-              "claude-3-sonnet-20240229",
-              "claude-3-haiku-20240307"
+              "claude-3-sonnet-20240229"
             ]
           },
           "symbol": "value_not_valid"
@@ -21784,9 +21836,9 @@
       "base_type": "string",
       "declaration_data": {
         "one_of": [
+          "claude-3-haiku-20240307",
           "claude-3-opus-20240229",
-          "claude-3-sonnet-20240229",
-          "claude-3-haiku-20240307"
+          "claude-3-sonnet-20240229"
         ],
         "type": "string"
       },
@@ -21808,9 +21860,9 @@
             "casting": {
               "cast_to": {
                 "one_of": [
+                  "claude-3-haiku-20240307",
                   "claude-3-opus-20240229",
-                  "claude-3-sonnet-20240229",
-                  "claude-3-haiku-20240307"
+                  "claude-3-sonnet-20240229"
                 ],
                 "type": "string"
               }
@@ -21825,9 +21877,9 @@
           "processor_class": "duck::SupportedValidators::OneOf",
           "processor_manifest_data": {
             "one_of": [
+              "claude-3-haiku-20240307",
               "claude-3-opus-20240229",
-              "claude-3-sonnet-20240229",
-              "claude-3-haiku-20240307"
+              "claude-3-sonnet-20240229"
             ]
           },
           "symbol": "value_not_valid"

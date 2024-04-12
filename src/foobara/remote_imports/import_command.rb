@@ -1,6 +1,7 @@
 require_relative "import_domain"
 require_relative "import_type"
 require_relative "import_error"
+require_relative "../remote_command"
 
 module Foobara
   module RemoteImports

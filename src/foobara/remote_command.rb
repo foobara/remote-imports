@@ -25,16 +25,18 @@ module Foobara
 
           error_class = Foobara.foobara_root_namespace.foobara_lookup_error!(error_class_name)
           key = possible_error_manifest.key
-          path = possible_error_manifest.path
           symbol = possible_error_manifest.symbol
           data = possible_error_manifest.processor_manifest_data
 
           category = possible_error_manifest.category
 
           possible_error = PossibleError.new(error_class, symbol:, data:, key:, category:)
-          possible_error.prepend_path!(path)
 
-          register_possible_error_class(possible_error)
+          if possible_error_manifest.manually_added
+            possible_error.manually_added = true
+          end
+
+          klass.register_possible_error_class(possible_error)
         end
 
         klass
@@ -91,24 +93,28 @@ module Foobara
             e = add_runtime_error(
               symbol: error["symbol"],
               message: error["message"],
-              context: error["context"]
+              context: error["context"],
+              halt: false
             )
             e.runtime_path = error["runtime_path"]
           when "data"
             add_input_error(
               symbol: error["symbol"],
-              key: error["key"],
               message: error["message"],
               context: error["context"],
               path: error["path"]
             )
           else
+            # :nocov:
             raise "Bad error category: #{error["category"]}"
+            # :nocov:
           end
         end
         halt!
       else
+        # :nocov:
         raise UnexpectedError, "#{response.code} from #{url}: #{response.body}"
+        # :nocov:
       end
     end
   end

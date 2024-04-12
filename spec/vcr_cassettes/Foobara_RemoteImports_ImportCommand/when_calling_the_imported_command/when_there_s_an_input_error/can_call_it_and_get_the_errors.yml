@@ -1,0 +1,46 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9292/run/SomeOrg::Math::CalculateExponent
+    body:
+      encoding: UTF-8
+      string: '{"base":-2,"exponent":3}'
+    headers:
+      Content-Type:
+      - application/json
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - localhost:9292
+  response:
+    status:
+      code: 422
+      message: Unprocessable Entity
+    headers:
+      Access-Control-Allow-Origin:
+      - http://localhost:3000
+      Content-Type:
+      - application/json
+      Access-Control-Allow-Methods:
+      - GET, POST
+      Access-Control-Allow-Headers:
+      - Content-Type
+      Content-Length:
+      - '187'
+      Server:
+      - WEBrick/1.8.1 (Ruby/3.2.2/2023-03-30)
+      Date:
+      - Fri, 12 Apr 2024 01:13:02 GMT
+      Connection:
+      - Keep-Alive
+    body:
+      encoding: UTF-8
+      string: '[{"key":"data.base.negative_base","path":["base"],"runtime_path":[],"category":"data","symbol":"negative_base","message":"Base
+        cannot be negative","context":{"base":-2},"is_fatal":false}]'
+  recorded_at: Fri, 12 Apr 2024 01:13:02 GMT
+recorded_with: VCR 6.2.0
