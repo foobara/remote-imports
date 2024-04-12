@@ -3,7 +3,7 @@ module Foobara
     class ImportType < Command
       include ImportBase
 
-      depends_on ImportDomain
+      depends_on ImportDomain, ImportType
 
       def find_manifests_to_import
         root_manifest.types
@@ -16,6 +16,15 @@ module Foobara
         )
 
         return if existing_type
+
+        manifest_to_import.types_depended_on.each do |depended_on_type|
+          run_subcommand!(
+            ImportType,
+            raw_manifest: manifest_data,
+            to_import: depended_on_type.reference,
+            already_imported:
+          )
+        end
 
         domain_manifest = manifest_to_import.domain
 
@@ -31,7 +40,8 @@ module Foobara
           mode: Namespace::LookupMode::ABSOLUTE
         )
 
-        domain.foobara_register_type(manifest_to_import.scoped_short_name, manifest_to_import.declaration_data)
+        domain.foobara_register_type(manifest_to_import.scoped_short_name,
+                                     manifest_to_import.declaration_data)
       end
     end
   end
