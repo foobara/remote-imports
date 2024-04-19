@@ -1,3 +1,5 @@
+require "net/http"
+
 module Foobara
   class RemoteCommand < Command
     # TODO: fill this out

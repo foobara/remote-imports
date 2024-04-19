@@ -1,4 +1,5 @@
 require "digest/md5"
+require "net/http"
 
 module Foobara
   module RemoteImports
