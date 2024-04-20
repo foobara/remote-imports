@@ -17,15 +17,6 @@ module Foobara
 
         return if existing_type
 
-        manifest_to_import.types_depended_on.each do |depended_on_type|
-          run_subcommand!(
-            ImportType,
-            raw_manifest: manifest_data,
-            to_import: depended_on_type.reference,
-            already_imported:
-          )
-        end
-
         domain_manifest = manifest_to_import.domain
 
         run_subcommand!(
@@ -35,13 +26,32 @@ module Foobara
           already_imported:
         )
 
-        domain = Foobara.foobara_root_namespace.foobara_lookup_domain!(
-          manifest_to_import.domain.reference,
-          mode: Namespace::LookupMode::ABSOLUTE
-        )
+        domain_manifest = manifest_to_import.domain
 
-        domain.foobara_register_type(manifest_to_import.scoped_short_name,
-                                     manifest_to_import.declaration_data)
+        domain = if domain_manifest.global?
+                   GlobalDomain
+                 else
+                   Foobara.foobara_root_namespace.foobara_lookup_domain!(
+                     domain_manifest.reference,
+                     mode: Namespace::LookupMode::ABSOLUTE
+                   )
+                 end
+
+        manifest_to_import.types_depended_on.each do |depended_on_type|
+          run_subcommand!(
+            ImportType,
+            raw_manifest: manifest_data,
+            to_import: depended_on_type.reference,
+            already_imported:
+          )
+        end
+
+        if manifest_to_import.scoped_prefix && !manifest_to_import.scoped_prefix.empty?
+          Util.make_module_p(manifest_to_import.scoped_full_path[0..-2].join("::"), tag: true)
+        end
+
+        type = domain.foobara_type_from_strict_stringified_declaration(manifest_to_import.declaration_data)
+        domain.foobara_register_type(manifest_to_import.scoped_path, type)
       end
     end
   end

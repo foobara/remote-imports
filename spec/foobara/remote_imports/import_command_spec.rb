@@ -1,7 +1,26 @@
 RSpec.describe Foobara::RemoteImports::ImportCommand do
   after do
     Foobara.reset_alls
-    Object.send(:remove_const, :SomeOrg) if Object.const_defined?(:SomeOrg)
+
+    %i[
+      SomeOrg
+      SomeOtherOrg
+      FoobaraAi
+      GlobalCommand
+      NestedModels2
+      NestedModels3
+      NestedModels
+      NestedModelsNoCollisions
+      SomeDomainWithoutOrg
+    ].each do |to_remove|
+      Object.send(:remove_const, to_remove) if Object.const_defined?(to_remove)
+    end
+
+    [
+      :Ai
+    ].each do |to_remove|
+      Foobara.send(:remove_const, to_remove) if Foobara.const_defined?(to_remove)
+    end
   end
 
   let(:command) { described_class.new(inputs) }
@@ -31,6 +50,23 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
     expect(command).to eq(SomeOrg::Math::CalculateExponent)
     expect(SomeOrg).to be_foobara_organization
     expect(SomeOrg::Math).to be_foobara_domain
+  end
+
+  context "when creating all commands" do
+    let(:inputs) do
+      {
+        raw_manifest:
+      }
+    end
+
+    it "imports them all" do
+      expect(outcome).to be_success
+
+      r = outcome.result
+
+      expect(r).to_not be_empty
+      expect(r).to all be < Foobara::Command
+    end
   end
 
   context "with bad manifest inputs" do
