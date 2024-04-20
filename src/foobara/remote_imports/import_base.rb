@@ -110,6 +110,8 @@ module Foobara
 
       # TODO: feels like a command smell to pass manifests here... reconsider algorithm
       def filter_manifests_to_import
+        return if to_import.nil? || to_import.empty?
+
         filter = Util.array(to_import)
 
         not_found = filter - manifests_to_import.map(&:reference)

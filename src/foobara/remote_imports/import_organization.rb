@@ -10,6 +10,10 @@ module Foobara
       end
 
       def import_object_from_manifest
+        if manifest_to_import.global?
+          return GlobalOrganization
+        end
+
         Organization.create(manifest_to_import.reference)
       end
     end

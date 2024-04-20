@@ -10,6 +10,10 @@ module Foobara
       end
 
       def import_object_from_manifest
+        if manifest_to_import.global?
+          return GlobalDomain
+        end
+
         organization = manifest_to_import.organization
 
         run_subcommand!(

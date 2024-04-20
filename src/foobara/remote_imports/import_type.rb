@@ -35,10 +35,18 @@ module Foobara
           already_imported:
         )
 
-        domain = Foobara.foobara_root_namespace.foobara_lookup_domain!(
-          manifest_to_import.domain.reference,
-          mode: Namespace::LookupMode::ABSOLUTE
-        )
+        domain_manifest = manifest_to_import.domain
+
+        domain = if domain_manifest.global?
+                   GlobalDomain
+                 else
+                   Foobara.foobara_root_namespace.foobara_lookup_domain!(
+                     domain_manifest.reference,
+                     mode: Namespace::LookupMode::ABSOLUTE
+                   )
+                 end
+
+        # Foobara::Util.make_module_p(manifest_to_import.reference)
 
         domain.foobara_register_type(manifest_to_import.scoped_short_name,
                                      manifest_to_import.declaration_data)
