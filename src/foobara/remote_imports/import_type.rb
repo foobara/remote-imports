@@ -46,8 +46,9 @@ module Foobara
           )
         end
 
-        if manifest_to_import.scoped_prefix && !manifest_to_import.scoped_prefix.empty?
-          Util.make_module_p(manifest_to_import.scoped_full_path[0..-2].join("::"), tag: true)
+        containing_module_name = manifest_to_import.scoped_full_path[0..-2].join("::")
+        unless containing_module_name.empty?
+          Util.make_module_p(containing_module_name, tag: true)
         end
 
         type = domain.foobara_type_from_strict_stringified_declaration(manifest_to_import.declaration_data)
