@@ -3,6 +3,8 @@ require "net/http"
 
 module Foobara
   class RemoteCommand < Command
+    class UnexpectedError < StandardError; end
+
     # TODO: fill this out
     class << self
       attr_accessor :url_base
