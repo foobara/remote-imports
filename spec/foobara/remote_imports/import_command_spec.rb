@@ -52,6 +52,19 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
     expect(SomeOrg::Math).to be_foobara_domain
   end
 
+  context "when using a partial match" do
+    let(:to_import) { "CreateNestedNoCollisions" }
+
+    it "creates the command" do
+      expect(outcome).to be_success
+
+      expect(result.size).to eq(1)
+      command = result.first
+      expect(command).to be < Foobara::Command
+      expect(command).to eq(NestedModelsNoCollisions::CreateNestedNoCollisions)
+    end
+  end
+
   context "when creating all commands" do
     let(:inputs) do
       {

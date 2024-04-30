@@ -113,9 +113,27 @@ module Foobara
       def filter_manifests_to_import
         return if to_import.nil? || to_import.empty?
 
+        references = manifests_to_import.map(&:reference)
+
         filter = Util.array(to_import)
 
-        not_found = filter - manifests_to_import.map(&:reference)
+        filter.map! do |name|
+          if references.include?(name)
+            name
+          else
+            suffix = "::#{name}"
+
+            partial_matches = references.select { |reference| reference.end_with?(suffix) }
+
+            if partial_matches.size == 1
+              partial_matches.first
+            else
+              name
+            end
+          end
+        end
+
+        not_found = filter - references
 
         if not_found.any?
           add_input_error :to_import, :not_found, "Could not find #{not_found}", not_found:
