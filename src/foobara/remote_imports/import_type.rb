@@ -89,6 +89,7 @@ module Foobara
 
         declaration_data["type"] = "model"
         declaration_data["model_base_class"] = "Foobara::Model"
+        declaration_data["mutable"] = false
         declaration_data["attributes_declaration"]["element_type_declarations"][primary_key_attribute]["required"] =
           true
 

@@ -33,5 +33,8 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
 
     expect(Capybara).to be < Foobara::Model
     expect(Capybara).to_not be < Foobara::Entity
+    capybara = Capybara.new(name: "Fumiko", age: 300, id: 1)
+
+    expect(capybara.mutable).to be false
   end
 end
