@@ -28,7 +28,7 @@ RSpec.describe Foobara::RemoteImports::ImportType do
     expect(result.size).to eq(1)
     type = result.first
     expect(type).to be_a(Foobara::Types::Type)
-    expect(type).to eq(SomeOrg::Auth::User.entity_type)
+    expect(type).to eq(SomeOrg::Auth::User.model_type)
     expect(SomeOrg).to be_foobara_organization
     expect(SomeOrg::Auth).to be_foobara_domain
   end
