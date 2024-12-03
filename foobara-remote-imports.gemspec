@@ -1,4 +1,4 @@
-require_relative "src/version"
+require_relative "version"
 
 Gem::Specification.new do |spec|
   spec.name = "foobara-remote-imports"
@@ -6,9 +6,9 @@ Gem::Specification.new do |spec|
   spec.authors = ["Miles Georgi"]
   spec.email = ["azimux@gmail.com"]
 
-  spec.summary = "No description. Add one."
+  spec.summary = "Used to import commands/entities/whatever from another system into this one."
   spec.homepage = "https://github.com/foobara/remote-imports"
-  spec.license = "None specified yet"
+  spec.license = "MPL-2.0"
   spec.required_ruby_version = ">= #{File.read("#{__dir__}/.ruby-version")}"
 
   spec.metadata["homepage_uri"] = spec.homepage
@@ -18,7 +18,9 @@ Gem::Specification.new do |spec|
   spec.files = Dir[
     "lib/**/*",
     "src/**/*",
-    "LICENSE.txt"
+    "LICENSE*.txt",
+    "README.md",
+    "CHANGELOG.md"
   ]
 
   spec.add_dependency "foobara"

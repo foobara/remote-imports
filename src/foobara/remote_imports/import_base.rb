@@ -1,4 +1,5 @@
 require "digest/md5"
+require "fileutils"
 require "json"
 require "net/http"
 
