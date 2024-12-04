@@ -1,3 +1,7 @@
+## [0.0.5] - 2024-12-04
+
+- Use new Error.subclass method interface
+
 ## [0.0.4] - 2024-12-03
 
 - Convert entities into immutable models

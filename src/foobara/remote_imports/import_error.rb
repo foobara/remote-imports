@@ -50,7 +50,7 @@ module Foobara
                      end
 
         Foobara::Error.subclass(
-          context_type_declaration: manifest_to_import.context_type_declaration,
+          context: manifest_to_import.context_type_declaration,
           name: manifest_to_import.error_class,
           symbol: manifest_to_import.symbol.to_sym,
           base_error:,

@@ -8,7 +8,7 @@ GIT
 PATH
   remote: .
   specs:
-    foobara-remote-imports (0.0.4)
+    foobara-remote-imports (0.0.5)
       foobara
 
 GEM
@@ -28,7 +28,7 @@ GEM
     docile (1.4.1)
     dotenv (3.1.4)
     ffi (1.17.0-x86_64-linux-gnu)
-    foobara (0.0.23)
+    foobara (0.0.26)
       foobara-util
     foobara-rubocop-rules (0.0.5)
       rubocop
