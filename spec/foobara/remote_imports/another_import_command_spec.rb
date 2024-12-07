@@ -31,10 +31,6 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
       expect(outcome).to be_success
     }.to change { Object.const_defined?(:Capybara) }
 
-    expect(Capybara).to be < Foobara::Model
-    expect(Capybara).to_not be < Foobara::Entity
-    capybara = Capybara.new(name: "Fumiko", age: 300, id: 1)
-
-    expect(capybara.mutable).to be false
+    expect(Capybara).to be < Foobara::Entity
   end
 end

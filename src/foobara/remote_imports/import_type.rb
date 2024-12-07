@@ -57,43 +57,8 @@ module Foobara
         # create the entity class, which should be considered a bug.
         declaration_data = manifest_to_import.declaration_data
 
-        if entity?(declaration_data)
-          declaration_data = entity_to_model(declaration_data)
-        end
-
         type = domain.foobara_type_from_strict_stringified_declaration(declaration_data)
         domain.foobara_register_type(manifest_to_import.scoped_path, type)
-      end
-
-      def entity?(declaration_data)
-        declaration_data["type"] == "entity"
-      end
-
-      # TODO: use a domain mapper??
-      def entity_to_model(declaration_data)
-        declaration_data = Util.deep_dup(declaration_data)
-
-        primary_key_attribute = declaration_data.delete("primary_key")
-
-        unless primary_key_attribute
-          # :nocov:
-          raise "Missing primary key attribute"
-          # :nocov:
-        end
-
-        unless declaration_data["model_base_class"] == "Foobara::Entity"
-          # :nocov:
-          raise "Expected model base class to be Foobara::Entity"
-          # :nocov:
-        end
-
-        declaration_data["type"] = "model"
-        declaration_data["model_base_class"] = "Foobara::Model"
-        declaration_data["mutable"] = false
-        declaration_data["attributes_declaration"]["element_type_declarations"][primary_key_attribute]["required"] =
-          true
-
-        declaration_data
       end
     end
   end
