@@ -56,9 +56,24 @@ module Foobara
         # Warning: cannot desugarize this because unfortunately desugarizing an entity declaration will actually
         # create the entity class, which should be considered a bug.
         declaration_data = manifest_to_import.declaration_data
+        base_type_manifest = manifest_to_import.base_type
+
+        if base_type_manifest
+          base_type = Foobara.foobara_lookup_type(base_type_manifest.reference)
+
+          if base_type.extends?(:entity)
+            declaration_data = Util.deep_dup(declaration_data)
+            declaration_data["mutable"] = false
+          end
+        end
 
         type = domain.foobara_type_from_strict_stringified_declaration(declaration_data)
-        domain.foobara_register_type(manifest_to_import.scoped_path, type)
+
+        unless domain.foobara_registered?(type)
+          domain.foobara_register_type(manifest_to_import.scoped_path, type)
+        end
+
+        type
       end
     end
   end

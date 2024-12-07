@@ -1,14 +1,7 @@
-GIT
-  remote: https://github.com/foobara/dotenv-loader.git
-  revision: be45a09af7cd96df51639b8d9e4c95631428226e
-  specs:
-    foobara-dotenv-loader (0.0.1)
-      dotenv
-
 PATH
   remote: .
   specs:
-    foobara-remote-imports (0.0.5)
+    foobara-remote-imports (0.0.6)
       foobara
 
 GEM
@@ -28,14 +21,16 @@ GEM
     docile (1.4.1)
     dotenv (3.1.4)
     ffi (1.17.0-x86_64-linux-gnu)
-    foobara (0.0.26)
+    foobara (0.0.30)
       foobara-util
+    foobara-dotenv-loader (0.0.1)
+      dotenv
     foobara-rubocop-rules (0.0.5)
       rubocop
       rubocop-rspec
     foobara-spec-helpers (0.0.3)
       foobara-util
-    foobara-util (0.0.7)
+    foobara-util (0.0.8)
     formatador (1.1.0)
     guard (2.19.0)
       formatador (>= 0.2.4)
@@ -138,7 +133,7 @@ PLATFORMS
   x86_64-linux
 
 DEPENDENCIES
-  foobara-dotenv-loader!
+  foobara-dotenv-loader
   foobara-remote-imports!
   foobara-rubocop-rules
   foobara-spec-helpers

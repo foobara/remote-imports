@@ -3,7 +3,7 @@ ruby File.read("#{__dir__}/.ruby-version")
 
 gemspec
 
-gem "foobara-dotenv-loader", github: "foobara/dotenv-loader"
+gem "foobara-dotenv-loader"
 
 gem "rake"
 

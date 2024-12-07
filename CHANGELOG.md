@@ -1,3 +1,8 @@
+## [0.0.6] - 2024-12-07
+
+- Make sure imported entities are immutable
+- Do not register already-registered types
+
 ## [0.0.5] - 2024-12-04
 
 - Use new Error.subclass method interface
