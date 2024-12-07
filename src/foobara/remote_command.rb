@@ -1,6 +1,8 @@
 require "json"
 require "net/http"
 
+require "foobara/command_connectors"
+
 module Foobara
   class RemoteCommand < Command
     class UnexpectedError < StandardError; end
@@ -50,6 +52,34 @@ module Foobara
       def url
         @url ||= "#{url_base}/run/#{name}"
       end
+    end
+
+    # We need to override this method and let the receiving end perform most of the casting.
+    # One exception is we will find and convert all records to their primary key values instead of sending
+    # serialized records over the wire.
+    def cast_and_validate_inputs
+      @inputs = if inputs_type.nil? && (raw_inputs.nil? || raw_inputs.empty?)
+                  # TODO: test this path
+                  # :nocov:
+                  {}
+                  # :nocov:
+                else
+                  data = inputs_type.declaration_data
+                  serializer = CommandConnectors::Serializers::EntitiesToPrimaryKeysSerializer.new(data)
+                  serializer.serialize(raw_inputs)
+                end
+    end
+
+    # Handling transactions across systems is too much to attempt for now and maybe ever.
+    # So let's noop several of these
+    %i[
+      auto_detect_current_transactions
+      relevant_entity_classes
+      open_transaction
+      rollback_transaction
+      commit_transaction
+    ].each do |method_name|
+      define_method(method_name) { nil }
     end
 
     def url
