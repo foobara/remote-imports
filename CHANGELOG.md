@@ -1,3 +1,7 @@
+## [0.0.7] - 2024-12-09
+
+- Convert entity into detached_entity when importing
+
 ## [0.0.6] - 2024-12-07
 
 - Make sure imported entities are immutable

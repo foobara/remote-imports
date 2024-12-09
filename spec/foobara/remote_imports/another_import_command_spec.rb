@@ -31,6 +31,6 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
       expect(outcome).to be_success
     }.to change { Object.const_defined?(:Capybara) }
 
-    expect(Capybara).to be < Foobara::Entity
+    expect(Capybara.superclass).to be(Foobara::DetachedEntity)
   end
 end

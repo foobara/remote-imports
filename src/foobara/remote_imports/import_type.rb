@@ -56,15 +56,26 @@ module Foobara
         # Warning: cannot desugarize this because unfortunately desugarizing an entity declaration will actually
         # create the entity class, which should be considered a bug.
         declaration_data = manifest_to_import.declaration_data
-        base_type_manifest = manifest_to_import.base_type
 
-        if base_type_manifest
-          base_type = Foobara.foobara_lookup_type(base_type_manifest.reference)
+        if declaration_data["type"] == "entity"
+          declaration_data = Util.deep_dup(declaration_data)
 
-          if base_type.extends?(:entity)
-            declaration_data = Util.deep_dup(declaration_data)
-            declaration_data["mutable"] = false
+          declaration_data["type"] = "detached_entity"
+          declaration_data["mutable"] = false
+
+          primary_key_attribute = declaration_data["primary_key"]
+          required = declaration_data["attributes_declaration"]["required"]
+
+          required << primary_key_attribute unless required.include?(primary_key_attribute)
+
+          model_base_class = declaration_data["model_base_class"]
+          unless model_base_class == "Foobara::Entity"
+            # :nocov:
+            raise "Expected model base class to be Foobara::Entity, but was #{model_base_class}"
+            # :nocov:
           end
+
+          declaration_data["model_base_class"] = "Foobara::DetachedEntity"
         end
 
         type = domain.foobara_type_from_strict_stringified_declaration(declaration_data)

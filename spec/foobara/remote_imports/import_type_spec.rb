@@ -29,6 +29,8 @@ RSpec.describe Foobara::RemoteImports::ImportType do
     type = result.first
     expect(type).to be_a(Foobara::Types::Type)
     expect(type).to eq(SomeOrg::Auth::User.model_type)
+    expect(SomeOrg::Auth::User.model_type.declaration_data[:type]).to eq(:detached_entity)
+    expect(SomeOrg::Auth::User.superclass).to be(Foobara::DetachedEntity)
     expect(SomeOrg).to be_foobara_organization
     expect(SomeOrg::Auth).to be_foobara_domain
   end
