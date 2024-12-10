@@ -64,8 +64,8 @@ module Foobara
                   {}
                   # :nocov:
                 else
-                  data = inputs_type.declaration_data
-                  serializer = CommandConnectors::Serializers::EntitiesToPrimaryKeysSerializer.new(data)
+                  serializer_class = CommandConnectors::Serializers::EntitiesToPrimaryKeysSerializer
+                  serializer = serializer_class.new(detached_to_primary_key: true)
                   serializer.serialize(raw_inputs)
                 end
     end

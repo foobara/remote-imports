@@ -1,6 +1,7 @@
-## [0.0.7] - 2024-12-09
+## [0.0.8] - 2024-12-09
 
 - Convert entity into detached_entity when importing
+- Convert detached entities to primary keys when casting remote command inputs
 
 ## [0.0.6] - 2024-12-07
 
