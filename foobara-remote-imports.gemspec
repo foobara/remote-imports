@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.summary = "Used to import commands/entities/whatever from another system into this one."
   spec.homepage = "https://github.com/foobara/remote-imports"
   spec.license = "MPL-2.0"
-  spec.required_ruby_version = ">= #{File.read("#{__dir__}/.ruby-version")}"
+  spec.required_ruby_version = Foobara::RemoteImports::MINIMUM_RUBY_VERSION
 
   spec.metadata["homepage_uri"] = spec.homepage
   spec.metadata["source_code_uri"] = spec.homepage
