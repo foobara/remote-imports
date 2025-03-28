@@ -1,3 +1,7 @@
+## [0.0.11] - 2025-03-28
+
+- Default to deanonymizing imported model classes by default to preserve existing behavior
+
 ## [0.0.9] - 2025-01-07
 
 - Bump Ruby to 3.4.1

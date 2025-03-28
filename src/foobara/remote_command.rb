@@ -145,6 +145,7 @@ module Foobara
             # :nocov:
           end
         end
+
         halt!
       else
         # :nocov:

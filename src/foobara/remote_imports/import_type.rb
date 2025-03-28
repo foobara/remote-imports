@@ -9,6 +9,7 @@ module Foobara
         root_manifest.types
       end
 
+      # TODO: break this method up?
       def import_object_from_manifest
         existing_type = Foobara.foobara_root_namespace.foobara_lookup_type(
           manifest_to_import.reference,
@@ -57,6 +58,7 @@ module Foobara
         # create the entity class, which should be considered a bug.
         declaration_data = manifest_to_import.declaration_data
 
+        # TODO: how do we solve this for :active_record type??
         if declaration_data["type"] == "entity"
           declaration_data = Util.deep_dup(declaration_data)
 
@@ -80,11 +82,19 @@ module Foobara
 
         type = domain.foobara_type_from_strict_stringified_declaration(declaration_data)
 
+        if deanonymize_models? && type.extends?(:model)
+          Foobara::Model.deanonymize_class(type.target_class)
+        end
+
         unless domain.foobara_registered?(type)
           domain.foobara_register_type(manifest_to_import.scoped_path, type)
         end
 
         type
+      end
+
+      def deanonymize_models?
+        deanonymize_models
       end
     end
   end

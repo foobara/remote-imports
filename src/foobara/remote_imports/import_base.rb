@@ -35,7 +35,8 @@ module Foobara
             cache: { type: :boolean, default: true },
             cache_path: { type: :string, default: "tmp/cache/foobara-remote-imports" },
             to_import: :duck,
-            already_imported: { type: :duck, allow_nil: true }
+            already_imported: { type: :duck, allow_nil: true },
+            deanonymize_models: { type: :boolean, default: true }
           )
 
           klass.result :duck
