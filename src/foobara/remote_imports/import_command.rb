@@ -8,6 +8,10 @@ module Foobara
     class ImportCommand < Command
       include ImportBase
 
+      add_inputs do
+        base_command_class Class, default: RemoteCommand
+      end
+
       depends_on ImportDomain, ImportType, ImportError
 
       def find_manifests_to_import
@@ -31,7 +35,7 @@ module Foobara
           already_imported:
         )
 
-        Util.make_class_p(manifest_to_import.reference, RemoteCommand)
+        Util.make_class_p(manifest_to_import.reference, base_command_class)
 
         manifest_to_import.types_depended_on.each do |type|
           run_subcommand!(
@@ -75,7 +79,8 @@ module Foobara
           inputs: manifest_to_import.inputs_type.relevant_manifest,
           result: manifest_to_import.result_type.relevant_manifest,
           possible_errors: manifest_to_import.possible_errors,
-          name: manifest_to_import.reference
+          name: manifest_to_import.reference,
+          base: base_command_class
         )
       end
     end

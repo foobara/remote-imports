@@ -124,7 +124,6 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
       FileUtils.rm_f(command.cache_file_path)
     end
 
-    # To rerecord this, change from :none to :once and run playground-be with rackup
     it "is success", vcr: { record: :none } do
       expect(outcome).to be_success
       # make sure loading from cache works fine as well
@@ -162,6 +161,39 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
 
       expect(remote_outcome).to be_success
       expect(remote_outcome.result).to be(8)
+    end
+
+    context "when using a different base command class" do
+      let(:base_command_class) do
+        stub_class "RemoteCommandWithHeader", Foobara::RemoteCommand do
+          def build_request_headers
+            super["Another-Header"] = "foobarbaz"
+          end
+        end
+      end
+      let(:inputs) do
+        super().merge(base_command_class:)
+      end
+
+      it "uses is an instance of and has behavior from the base class", vcr: { record: :none } do
+        expect {
+          expect(outcome).to be_success
+        }.to change { Object.const_defined?("SomeOrg::Math::CalculateExponent") }
+
+        expect(SomeOrg::Math::CalculateExponent.superclass).to be RemoteCommandWithHeader
+
+        remote_command = SomeOrg::Math::CalculateExponent.new(base: 2, exponent: 3)
+        remote_outcome = remote_command.run
+
+        expect(remote_outcome).to be_success
+        expect(remote_outcome.result).to be(8)
+
+        expect(remote_command.request_headers["Another-Header"]).to eq("foobarbaz")
+
+        # NOTE: bad form to couple to an instance variable so delete this assertion if need be
+        interaction = VCR.current_cassette.http_interactions.instance_variable_get(:@used_interactions).first
+        expect(interaction.request.headers["Another-Header"]).to eq(["foobarbaz"])
+      end
     end
 
     context "when there's an error" do

@@ -1,4 +1,8 @@
-## [0.0.11] - 2025-03-28
+## [0.0.11] - 2025-04-19
+
+- Facilitate overriding methods in RemoteCommand
+
+## [0.0.10] - 2025-03-28
 
 - Default to deanonymizing imported model classes by default to preserve existing behavior
 

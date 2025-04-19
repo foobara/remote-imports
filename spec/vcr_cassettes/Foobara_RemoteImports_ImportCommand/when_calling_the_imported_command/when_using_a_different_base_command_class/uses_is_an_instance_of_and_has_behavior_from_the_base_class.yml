@@ -1,0 +1,37 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:9292/run/SomeOrg::Math::CalculateExponent
+    body:
+      encoding: UTF-8
+      string: '{"base":2,"exponent":3}'
+    headers:
+      Content-Type:
+      - application/json
+      Another-Header:
+      - foobarbaz
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - localhost:9292
+  response:
+    status:
+      code: 200
+      message: OK
+    headers:
+      Access-Control-Allow-Origin:
+      - http://localhost:3000
+      Content-Type:
+      - application/json
+      Content-Length:
+      - '1'
+    body:
+      encoding: UTF-8
+      string: '8'
+  recorded_at: Sat, 19 Apr 2025 20:01:46 GMT
+recorded_with: VCR 6.3.1
