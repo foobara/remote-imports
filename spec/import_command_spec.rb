@@ -37,7 +37,7 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
   end
   let(:to_import) { "SomeOrg::Math::CalculateExponent" }
   let(:raw_manifest) { JSON.parse(manifest_json) }
-  let(:manifest_json) { File.read("#{__dir__}/../../fixtures/foobara-manifest.json") }
+  let(:manifest_json) { File.read("#{__dir__}/fixtures/foobara-manifest.json") }
 
   it "is creates the command" do
     expect {

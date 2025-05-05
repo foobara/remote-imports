@@ -24,7 +24,7 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
     }
   end
   let(:raw_manifest) { JSON.parse(manifest_json) }
-  let(:manifest_json) { File.read("#{__dir__}/../../fixtures/another-manifest.json") }
+  let(:manifest_json) { File.read("#{__dir__}/fixtures/another-manifest.json") }
 
   it "is creates the command and converts entities to models" do
     expect {

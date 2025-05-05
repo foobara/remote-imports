@@ -18,7 +18,7 @@ RSpec.describe Foobara::RemoteImports::ImportOrganization do
   end
   let(:to_import) { "SomeOrg" }
   let(:raw_manifest) { JSON.parse(manifest_json) }
-  let(:manifest_json) { File.read("#{__dir__}/../../fixtures/foobara-manifest.json") }
+  let(:manifest_json) { File.read("#{__dir__}/fixtures/foobara-manifest.json") }
 
   it "is successful" do
     expect {

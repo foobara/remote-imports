@@ -18,7 +18,7 @@ RSpec.describe Foobara::RemoteImports::ImportType do
   end
   let(:to_import) { "SomeOrg::Auth::User" }
   let(:raw_manifest) { JSON.parse(manifest_json) }
-  let(:manifest_json) { File.read("#{__dir__}/../../fixtures/foobara-manifest.json") }
+  let(:manifest_json) { File.read("#{__dir__}/fixtures/foobara-manifest.json") }
 
   it "is creates the type, org, and domain" do
     expect {

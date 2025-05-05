@@ -18,7 +18,7 @@ RSpec.describe Foobara::RemoteImports::ImportDomain do
   end
   let(:to_import) { "SomeOrg::Math" }
   let(:raw_manifest) { JSON.parse(manifest_json) }
-  let(:manifest_json) { File.read("#{__dir__}/../../fixtures/foobara-manifest.json") }
+  let(:manifest_json) { File.read("#{__dir__}/fixtures/foobara-manifest.json") }
 
   it "is creates the org and domain" do
     expect {
