@@ -70,12 +70,12 @@ module Foobara
 
     # Handling transactions across systems is too much to attempt for now and maybe ever.
     # So let's noop several of these
-    %i[
-      auto_detect_current_transactions
-      relevant_entity_classes
-      open_transaction
-      rollback_transaction
-      commit_transaction
+    [
+      :auto_detect_current_transactions,
+      :relevant_entity_classes,
+      :open_transaction,
+      :rollback_transaction,
+      :commit_transaction
     ].each do |method_name|
       define_method(method_name) { nil }
     end

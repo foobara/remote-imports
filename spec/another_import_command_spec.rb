@@ -2,11 +2,11 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
   after do
     Foobara.reset_alls
 
-    %i[
-      Capybara
-      CreateCapybara
-      FindCapybara
-      IncrementAge
+    [
+      :Capybara,
+      :CreateCapybara,
+      :FindCapybara,
+      :IncrementAge
     ].each do |to_remove|
       Object.send(:remove_const, to_remove) if Object.const_defined?(to_remove)
     end

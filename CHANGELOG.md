@@ -1,3 +1,7 @@
+## [0.0.12] - 2025-05-05
+
+- Add AuthenticatedRemoteCommand
+
 ## [0.0.11] - 2025-04-19
 
 - Facilitate overriding methods in RemoteCommand
