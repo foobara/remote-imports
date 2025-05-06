@@ -9,7 +9,11 @@ module Foobara
       include ImportBase
 
       add_inputs do
-        base_command_class Class, default: RemoteCommand
+        base_command_class :duck, :allow_nil
+        authenticate_with_header :allow_nil do
+          name :string, :required, "The header name to set"
+          value :duck, :required, "A string value or proc that returns a string value"
+        end
       end
 
       depends_on ImportDomain, ImportType, ImportError
@@ -35,7 +39,7 @@ module Foobara
           already_imported:
         )
 
-        Util.make_class_p(manifest_to_import.reference, base_command_class)
+        Util.make_class_p(manifest_to_import.reference, determine_base_command_class)
 
         manifest_to_import.types_depended_on.each do |type|
           run_subcommand!(
@@ -73,15 +77,32 @@ module Foobara
       def build_command
         url_base = root_manifest.metadata["url"].gsub(/\/manifest$/, "")
 
-        RemoteCommand.subclass(
+        subclass_args = {
           url_base:,
           description: manifest_to_import.description,
           inputs: manifest_to_import.inputs_type.relevant_manifest,
           result: manifest_to_import.result_type.relevant_manifest,
           possible_errors: manifest_to_import.possible_errors,
           name: manifest_to_import.reference,
-          base: base_command_class
-        )
+          base: determine_base_command_class
+        }
+
+        if determine_base_command_class == AuthenticatedRemoteCommand
+          subclass_args.merge!(authenticate_with_header:)
+        end
+
+        determine_base_command_class.subclass(**subclass_args)
+      end
+
+      def determine_base_command_class
+        @determine_base_command_class ||= if base_command_class
+                                            base_command_class
+                                          elsif manifest_to_import.requires_authentication? &&
+                                                authenticate_with_header
+                                            AuthenticatedRemoteCommand
+                                          else
+                                            RemoteCommand
+                                          end
       end
     end
   end

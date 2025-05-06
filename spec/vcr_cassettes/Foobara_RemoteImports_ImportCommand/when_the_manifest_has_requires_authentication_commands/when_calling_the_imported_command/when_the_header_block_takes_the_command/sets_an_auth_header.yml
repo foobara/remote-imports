@@ -1,0 +1,56 @@
+---
+http_interactions:
+- request:
+    method: post
+    uri: http://localhost:3000/run/ComputeExponent
+    body:
+      encoding: UTF-8
+      string: '{"base":2,"exponent":3}'
+    headers:
+      Content-Type:
+      - application/json
+      X-Api-Key:
+      - ComputeExponent
+      Accept-Encoding:
+      - gzip;q=1.0,deflate;q=0.6,identity;q=0.3
+      Accept:
+      - "*/*"
+      User-Agent:
+      - Ruby
+      Host:
+      - localhost:3000
+  response:
+    status:
+      code: 401
+      message: Unauthorized
+    headers:
+      X-Frame-Options:
+      - SAMEORIGIN
+      X-Xss-Protection:
+      - '0'
+      X-Content-Type-Options:
+      - nosniff
+      X-Permitted-Cross-Domain-Policies:
+      - none
+      Referrer-Policy:
+      - strict-origin-when-cross-origin
+      Content-Type:
+      - application/json
+      Vary:
+      - Accept, Origin
+      Cache-Control:
+      - no-cache
+      X-Request-Id:
+      - 5af0a5db-c711-4adc-a395-29181aba07ba
+      X-Runtime:
+      - '0.009257'
+      Server-Timing:
+      - start_processing.action_controller;dur=0.01, halted_callback.action_controller;dur=0.01,
+        process_action.action_controller;dur=3.44
+      Content-Length:
+      - '168'
+    body:
+      encoding: UTF-8
+      string: '[{"key":"runtime.unauthenticated","path":[],"runtime_path":[],"category":"runtime","symbol":"unauthenticated","message":"Unauthenticated","context":{},"is_fatal":true}]'
+  recorded_at: Tue, 06 May 2025 01:32:27 GMT
+recorded_with: VCR 6.3.1

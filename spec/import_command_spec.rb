@@ -2,16 +2,17 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
   after do
     Foobara.reset_alls
 
-    %i[
-      SomeOrg
-      SomeOtherOrg
-      FoobaraAi
-      GlobalCommand
-      NestedModels2
-      NestedModels3
-      NestedModels
-      NestedModelsNoCollisions
-      SomeDomainWithoutOrg
+    [
+      :SomeOrg,
+      :SomeOtherOrg,
+      :FoobaraAi,
+      :GlobalCommand,
+      :NestedModels2,
+      :NestedModels3,
+      :NestedModels,
+      :NestedModelsNoCollisions,
+      :SomeDomainWithoutOrg,
+      :ComputeExponent
     ].each do |to_remove|
       Object.send(:remove_const, to_remove) if Object.const_defined?(to_remove)
     end
@@ -241,6 +242,54 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
         expect(error.message).to eq("Base cannot be negative")
         expect(error.path).to eq([:base])
         expect(error.runtime_path).to eq([])
+      end
+    end
+  end
+
+  context "when the manifest has requires_authentication commands" do
+    let(:manifest_json) { File.read("#{__dir__}/fixtures/manifest-with-auth.json") }
+    let(:to_import) { "ComputeExponent" }
+    let(:inputs) do
+      {
+        raw_manifest:,
+        to_import:,
+        authenticate_with_header: { name: "x-api-key", value: -> { "foobarbaz" } }
+      }
+    end
+
+    # This was recorded while the demo blog-rails app was around.
+    # Not sure if it still is or if it still has ComputeExponent.
+    # If not and you need to rerecord this, then you'll have to find another manifest/command. Sorry :(
+    context "when calling the imported command", vcr: { record: :once } do
+      it "sets an auth header" do
+        expect(outcome).to be_success
+
+        expect(ComputeExponent.superclass).to be(Foobara::AuthenticatedRemoteCommand)
+
+        remote_command = ComputeExponent.new(base: 2, exponent: 3)
+        remote_outcome = remote_command.run
+
+        expect(remote_outcome).to_not be_success
+        expect(remote_outcome.errors.size).to be(1)
+        expect(remote_outcome.errors_hash.keys).to eq(["runtime.unauthenticated"])
+
+        expect(remote_command.request_headers["x-api-key"]).to eq("foobarbaz")
+      end
+
+      context "when the header block takes the command" do
+        let(:inputs) do
+          super().merge(authenticate_with_header: { name: "x-api-key", value: ->(command) { command.class.name } })
+        end
+
+        it "sets an auth header" do
+          expect(outcome).to be_success
+
+          remote_command = ComputeExponent.new(base: 2, exponent: 3)
+          remote_outcome = remote_command.run
+
+          expect(remote_outcome.errors_hash.keys).to eq(["runtime.unauthenticated"])
+          expect(remote_command.request_headers["x-api-key"]).to eq("ComputeExponent")
+        end
       end
     end
   end

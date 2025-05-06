@@ -7,7 +7,6 @@ module Foobara
   class RemoteCommand < Command
     class UnexpectedError < StandardError; end
 
-    # TODO: fill this out
     class << self
       attr_accessor :url_base
 
@@ -18,10 +17,9 @@ module Foobara
         result:,
         possible_errors:,
         name:,
-        base: self
+        base: RemoteCommand
       )
         klass = Util.make_class_p(name, base)
-
         klass.url_base = url_base
         klass.description description
         klass.inputs inputs
