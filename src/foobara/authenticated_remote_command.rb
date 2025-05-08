@@ -3,18 +3,18 @@ require_relative "remote_command"
 module Foobara
   class AuthenticatedRemoteCommand < RemoteCommand
     class << self
-      attr_accessor :authenticate_with_header_name, :authenticate_with_header_value
+      attr_accessor :auth_header_name, :auth_header_value
 
-      def subclass(authenticate_with_header:, **opts)
+      def subclass(auth_header:, **opts)
         super(base: AuthenticatedRemoteCommand, **opts).tap do |klass|
-          klass.authenticate_with_header_name = authenticate_with_header[:name]
-          klass.authenticate_with_header_value = authenticate_with_header[:value]
+          klass.auth_header_name = auth_header[0]
+          klass.auth_header_value = auth_header[1]
         end
       end
     end
 
     def build_request_headers
-      value = self.class.authenticate_with_header_value
+      value = self.class.auth_header_value
 
       if value.is_a?(Proc)
         value = if value.lambda? && value.arity == 0
@@ -24,7 +24,7 @@ module Foobara
                 end
       end
 
-      self.request_headers = super.merge(self.class.authenticate_with_header_name => value)
+      self.request_headers = super.merge(self.class.auth_header_name => value)
     end
   end
 end

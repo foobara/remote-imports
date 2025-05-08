@@ -253,7 +253,7 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
       {
         raw_manifest:,
         to_import:,
-        authenticate_with_header: { name: "x-api-key", value: -> { "foobarbaz" } }
+        auth_header: ["x-api-key", -> { "foobarbaz" }]
       }
     end
 
@@ -278,7 +278,7 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
 
       context "when the header block takes the command" do
         let(:inputs) do
-          super().merge(authenticate_with_header: { name: "x-api-key", value: ->(command) { command.class.name } })
+          super().merge(auth_header: ["x-api-key", ->(command) { command.class.name }])
         end
 
         it "sets an auth header" do

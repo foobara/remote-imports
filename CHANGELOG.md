@@ -1,3 +1,7 @@
+## [0.0.13] - 2025-05-07
+
+- Change :authenticate_with_header to be shorter and a tuple
+
 ## [0.0.12] - 2025-05-05
 
 - Add AuthenticatedRemoteCommand

@@ -10,10 +10,9 @@ module Foobara
 
       add_inputs do
         base_command_class :duck, :allow_nil
-        authenticate_with_header :allow_nil do
-          name :string, :required, "The header name to set"
-          value :duck, :required, "A string value or proc that returns a string value"
-        end
+        auth_header :tuple,
+                    element_type_declarations: [:string, :duck],
+                    description: "A header name, header value/proc pair."
       end
 
       depends_on ImportDomain, ImportType, ImportError
@@ -88,7 +87,7 @@ module Foobara
         }
 
         if determine_base_command_class == AuthenticatedRemoteCommand
-          subclass_args.merge!(authenticate_with_header:)
+          subclass_args.merge!(auth_header:)
         end
 
         determine_base_command_class.subclass(**subclass_args)
@@ -98,7 +97,7 @@ module Foobara
         @determine_base_command_class ||= if base_command_class
                                             base_command_class
                                           elsif manifest_to_import.requires_authentication? &&
-                                                authenticate_with_header
+                                                auth_header
                                             AuthenticatedRemoteCommand
                                           else
                                             RemoteCommand
