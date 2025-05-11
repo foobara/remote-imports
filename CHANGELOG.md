@@ -1,3 +1,7 @@
+## [0.0.14] - 2025-05-11
+
+- Fix bug that incorrectly leaves a model class anonymous if there's a custom type named "model"
+
 ## [0.0.13] - 2025-05-07
 
 - Change :authenticate_with_header to be shorter and a tuple

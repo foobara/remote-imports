@@ -82,7 +82,7 @@ module Foobara
 
         type = domain.foobara_type_from_strict_stringified_declaration(declaration_data)
 
-        if deanonymize_models? && type.extends?(:model)
+        if deanonymize_models? && type.extends_type?(BuiltinTypes[:model])
           Foobara::Model.deanonymize_class(type.target_class)
         end
 
