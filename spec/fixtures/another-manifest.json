@@ -90,9 +90,7 @@
               "cast_to": {
                 "type": "attributes",
                 "element_type_declarations": {
-                  "id": {
-                    "type": "integer"
-                  },
+                  "id": "integer",
                   "name": {
                     "description": "Official name",
                     "type": "string"
@@ -124,9 +122,7 @@
           "error": "Foobara::Value::Processor::Casting::CannotCastError",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "integer"
-              }
+              "cast_to": "integer"
             }
           }
         },
@@ -198,9 +194,7 @@
           "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
           "processor_manifest_data": {
             "element_type_declarations": {
-              "id": {
-                "type": "integer"
-              },
+              "id": "integer",
               "name": {
                 "description": "Official name",
                 "type": "string"
@@ -220,9 +214,7 @@
       "inputs_type": {
         "type": "attributes",
         "element_type_declarations": {
-          "id": {
-            "type": "integer"
-          },
+          "id": "integer",
           "name": {
             "description": "Official name",
             "type": "string"
@@ -242,9 +234,7 @@
         ]
       },
       "description": "Just creates a capybara!",
-      "result_type": {
-        "type": "Capybara"
-      },
+      "result_type": "Capybara",
       "serializers": [
         "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
         "Foobara::CommandConnectors::Serializers::AtomicSerializer",
@@ -306,9 +296,7 @@
               "cast_to": {
                 "type": "attributes",
                 "element_type_declarations": {
-                  "id": {
-                    "type": "integer"
-                  }
+                  "id": "integer"
                 },
                 "required": [
                   "id"
@@ -327,9 +315,7 @@
           "error": "Foobara::Value::Processor::Casting::CannotCastError",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "integer"
-              }
+              "cast_to": "integer"
             }
           }
         },
@@ -366,9 +352,7 @@
           "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
           "processor_manifest_data": {
             "element_type_declarations": {
-              "id": {
-                "type": "integer"
-              }
+              "id": "integer"
             }
           }
         }
@@ -376,18 +360,14 @@
       "inputs_type": {
         "type": "attributes",
         "element_type_declarations": {
-          "id": {
-            "type": "integer"
-          }
+          "id": "integer"
         },
         "required": [
           "id"
         ]
       },
       "description": "Just tell us who you want to find!",
-      "result_type": {
-        "type": "Capybara"
-      },
+      "result_type": "Capybara",
       "serializers": [
         "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
         "Foobara::CommandConnectors::Serializers::AtomicSerializer",
@@ -448,9 +428,7 @@
               "cast_to": {
                 "type": "attributes",
                 "element_type_declarations": {
-                  "capybara": {
-                    "type": "Capybara"
-                  }
+                  "capybara": "Capybara"
                 },
                 "required": [
                   "capybara"
@@ -477,9 +455,7 @@
                 "attributes_declaration": {
                   "type": "attributes",
                   "element_type_declarations": {
-                    "id": {
-                      "type": "integer"
-                    },
+                    "id": "integer",
                     "name": {
                       "description": "Official name",
                       "type": "string"
@@ -537,9 +513,7 @@
           "processor_class": "attributes::SupportedProcessors::ElementTypeDeclarations",
           "processor_manifest_data": {
             "element_type_declarations": {
-              "capybara": {
-                "type": "Capybara"
-              }
+              "capybara": "Capybara"
             }
           }
         }
@@ -547,18 +521,14 @@
       "inputs_type": {
         "type": "attributes",
         "element_type_declarations": {
-          "capybara": {
-            "type": "Capybara"
-          }
+          "capybara": "Capybara"
         },
         "required": [
           "capybara"
         ]
       },
       "description": "A trip around the sun!",
-      "result_type": {
-        "type": "Capybara"
-      },
+      "result_type": "Capybara",
       "serializers": [
         "Foobara::CommandConnectors::Serializers::ErrorsSerializer",
         "Foobara::CommandConnectors::Serializers::AtomicSerializer",
@@ -637,12 +607,8 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "attribute_name": {
-            "type": "symbol"
-          },
-          "value": {
-            "type": "duck"
-          }
+          "attribute_name": "symbol",
+          "value": "duck"
         }
       },
       "is_fatal": false,
@@ -682,15 +648,9 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "cast_to": {
-            "type": "duck"
-          },
-          "value": {
-            "type": "duck"
-          },
-          "attribute_name": {
-            "type": "symbol"
-          }
+          "cast_to": "duck",
+          "value": "duck",
+          "attribute_name": "symbol"
         }
       },
       "is_fatal": true,
@@ -731,15 +691,9 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "expected_size": {
-            "type": "integer"
-          },
-          "actual_size": {
-            "type": "integer"
-          },
-          "value": {
-            "type": "array"
-          }
+          "expected_size": "integer",
+          "actual_size": "integer",
+          "value": "array"
         }
       },
       "is_fatal": false,
@@ -781,15 +735,11 @@
         "element_type_declarations": {
           "unexpected_attributes": {
             "type": "array",
-            "element_type_declaration": {
-              "type": "symbol"
-            }
+            "element_type_declaration": "symbol"
           },
           "allowed_attributes": {
             "type": "array",
-            "element_type_declaration": {
-              "type": "symbol"
-            }
+            "element_type_declaration": "symbol"
           }
         }
       },
@@ -830,9 +780,7 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "attribute_name": {
-            "type": "symbol"
-          }
+          "attribute_name": "symbol"
         }
       },
       "is_fatal": true,
@@ -873,12 +821,8 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "value": {
-            "type": "duck"
-          },
-          "expected_class_name": {
-            "type": "string"
-          }
+          "value": "duck",
+          "expected_class_name": "string"
         }
       },
       "is_fatal": false,
@@ -918,14 +862,10 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "value": {
-            "type": "duck"
-          },
+          "value": "duck",
           "valid_values": {
             "type": "array",
-            "element_type_declaration": {
-              "type": "duck"
-            }
+            "element_type_declaration": "duck"
           }
         }
       },
@@ -967,12 +907,8 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "value": {
-            "type": "number"
-          },
-          "max": {
-            "type": "number"
-          }
+          "value": "number",
+          "max": "number"
         }
       },
       "is_fatal": false,
@@ -1013,12 +949,8 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "value": {
-            "type": "number"
-          },
-          "min": {
-            "type": "number"
-          }
+          "value": "number",
+          "min": "number"
         }
       },
       "is_fatal": false,
@@ -1059,12 +991,8 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "value": {
-            "type": "string"
-          },
-          "regex": {
-            "type": "duck"
-          }
+          "value": "string",
+          "regex": "duck"
         }
       },
       "is_fatal": false,
@@ -1106,12 +1034,8 @@
       "context_type_declaration": {
         "type": "attributes",
         "element_type_declarations": {
-          "value": {
-            "type": "string"
-          },
-          "max_length": {
-            "type": "integer"
-          }
+          "value": "string",
+          "max_length": "integer"
         }
       },
       "is_fatal": false,
@@ -2385,9 +2309,7 @@
         "attributes_declaration": {
           "type": "attributes",
           "element_type_declarations": {
-            "id": {
-              "type": "integer"
-            },
+            "id": "integer",
             "name": {
               "description": "Official name",
               "type": "string"
@@ -2426,9 +2348,7 @@
                 "attributes_declaration": {
                   "type": "attributes",
                   "element_type_declarations": {
-                    "id": {
-                      "type": "integer"
-                    },
+                    "id": "integer",
                     "name": {
                       "description": "Official name",
                       "type": "string"
@@ -2491,9 +2411,7 @@
       "attributes_type": {
         "type": "attributes",
         "element_type_declarations": {
-          "id": {
-            "type": "integer"
-          },
+          "id": "integer",
           "name": {
             "description": "Official name",
             "type": "string"
@@ -2519,9 +2437,7 @@
       "model_class": "Capybara",
       "entity_name": "Capybara",
       "primary_key_attribute": "id",
-      "primary_key_type": {
-        "type": "integer"
-      }
+      "primary_key_type": "integer"
     },
     "array": {
       "scoped_path": [
@@ -2542,9 +2458,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "array"
-      },
+      "declaration_data": "array",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -2554,9 +2468,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "array"
-              }
+              "cast_to": "array"
             }
           }
         }
@@ -2612,9 +2524,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "associative_array"
-      },
+      "declaration_data": "associative_array",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -2624,9 +2534,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "associative_array"
-              }
+              "cast_to": "associative_array"
             }
           }
         }
@@ -2683,9 +2591,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "atomic_duck"
-      },
+      "declaration_data": "atomic_duck",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -2695,9 +2601,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "atomic_duck"
-              }
+              "cast_to": "atomic_duck"
             }
           }
         }
@@ -2741,9 +2645,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "attributes"
-      },
+      "declaration_data": "attributes",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -2753,9 +2655,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "attributes"
-              }
+              "cast_to": "attributes"
             }
           }
         }
@@ -2815,9 +2715,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "duck"
-      },
+      "declaration_data": "duck",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -2827,9 +2725,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "duck"
-              }
+              "cast_to": "duck"
             }
           }
         }
@@ -2872,9 +2768,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "duckture"
-      },
+      "declaration_data": "duckture",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -2884,9 +2778,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "duckture"
-              }
+              "cast_to": "duckture"
             }
           }
         }
@@ -2930,9 +2822,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "entity"
-      },
+      "declaration_data": "entity",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -2942,9 +2832,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "entity"
-              }
+              "cast_to": "entity"
             }
           }
         }
@@ -2997,9 +2885,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "integer"
-      },
+      "declaration_data": "integer",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -3009,9 +2895,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "integer"
-              }
+              "cast_to": "integer"
             }
           }
         }
@@ -3066,9 +2950,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "model"
-      },
+      "declaration_data": "model",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -3078,9 +2960,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "model"
-              }
+              "cast_to": "model"
             }
           }
         }
@@ -3133,9 +3013,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "number"
-      },
+      "declaration_data": "number",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -3145,9 +3023,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "number"
-              }
+              "cast_to": "number"
             }
           }
         }
@@ -3194,9 +3070,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "string"
-      },
+      "declaration_data": "string",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -3206,9 +3080,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "string"
-              }
+              "cast_to": "string"
             }
           }
         }
@@ -3268,9 +3140,7 @@
         "domain",
         "global_organization::global_domain"
       ],
-      "declaration_data": {
-        "type": "symbol"
-      },
+      "declaration_data": "symbol",
       "possible_errors": {
         "data.cannot_cast": {
           "category": "data",
@@ -3280,9 +3150,7 @@
           "processor_class": "Foobara::Value::Processor::Casting",
           "processor_manifest_data": {
             "casting": {
-              "cast_to": {
-                "type": "symbol"
-              }
+              "cast_to": "symbol"
             }
           }
         }

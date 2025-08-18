@@ -76,11 +76,24 @@ module Foobara
       def build_command
         url_base = root_manifest.metadata["url"].gsub(/\/manifest$/, "")
 
+        domain = Namespace.global.foobara_lookup_domain!(
+          manifest_to_import.domain.scoped_full_path,
+          mode: Namespace::LookupMode::ABSOLUTE_SINGLE_NAMESPACE
+        )
+
+        inputs_type = nil
+        result_type = nil
+
+        TypeDeclarations.strict_stringified do
+          inputs_type = domain.foobara_type_from_declaration(manifest_to_import.inputs_type.relevant_manifest)
+          result_type = domain.foobara_type_from_declaration(manifest_to_import.result_type.relevant_manifest)
+        end
+
         subclass_args = {
           url_base:,
           description: manifest_to_import.description,
-          inputs: manifest_to_import.inputs_type.relevant_manifest,
-          result: manifest_to_import.result_type.relevant_manifest,
+          inputs: inputs_type,
+          result: result_type,
           possible_errors: manifest_to_import.possible_errors,
           name: manifest_to_import.reference,
           base: determine_base_command_class
