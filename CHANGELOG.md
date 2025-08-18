@@ -1,3 +1,7 @@
+## [1.1.0] - 2025-08-22
+
+- Handle new Foobara 0.1.0 type declarations
+
 ## [0.0.14] - 2025-05-11
 
 - Fix bug that incorrectly leaves a model class anonymous if there's a custom type named "model"

@@ -260,7 +260,7 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
     # This was recorded while the demo blog-rails app was around.
     # Not sure if it still is or if it still has ComputeExponent.
     # If not and you need to rerecord this, then you'll have to find another manifest/command. Sorry :(
-    context "when calling the imported command", vcr: { record: :once } do
+    context "when calling the imported command", vcr: { record: :none } do
       it "sets an auth header" do
         expect(outcome).to be_success
 
