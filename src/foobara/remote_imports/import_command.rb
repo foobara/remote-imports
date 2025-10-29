@@ -13,9 +13,29 @@ module Foobara
         auth_header :tuple,
                     element_type_declarations: [:string, :duck],
                     description: "A header name, header value/proc pair."
+        manifest_requires_auth :boolean, default: false
       end
 
       depends_on ImportDomain, ImportType, ImportError
+
+      def load_manifest_headers
+        if manifest_requires_auth
+          key = auth_header.first
+          value = auth_header.last
+
+          if value.is_a?(Proc)
+            value = if value.lambda? && value.arity == 0
+                      value.call
+                    else
+                      value.call(self)
+                    end
+          end
+
+          super.merge(key => value)
+        else
+          super
+        end
+      end
 
       def find_manifests_to_import
         root_manifest.commands

@@ -1,3 +1,8 @@
+## [1.2.0] - 2025-10-29
+
+- Support auth to get the manifest itself when needed
+- Strip entire path/query string from the manifest URL to get the API url base
+
 ## [1.1.0] - 2025-08-22
 
 - Handle new Foobara 0.1.0 type declarations

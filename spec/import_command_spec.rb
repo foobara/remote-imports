@@ -292,5 +292,31 @@ RSpec.describe Foobara::RemoteImports::ImportCommand do
         end
       end
     end
+
+    context "when the manifest itself requires auth" do
+      let(:inputs) do
+        super().merge(manifest_requires_auth: true)
+      end
+
+      describe "#load_manifest_headers" do
+        it "contains the API key" do
+          command.cast_and_validate_inputs
+
+          expect(command.load_manifest_headers["x-api-key"]).to eq("foobarbaz")
+        end
+
+        context "when api key is a proc" do
+          let(:inputs) do
+            super().merge(auth_header: ["x-api-key", proc { "foobarbaz" }])
+          end
+
+          it "contains the API key" do
+            command.cast_and_validate_inputs
+
+            expect(command.load_manifest_headers["x-api-key"]).to eq("foobarbaz")
+          end
+        end
+      end
+    end
   end
 end

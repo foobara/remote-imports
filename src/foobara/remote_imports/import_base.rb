@@ -96,19 +96,29 @@ module Foobara
       end
 
       def load_manifest_from_url
-        url = URI.parse(manifest_url)
-        response = Net::HTTP.get_response(url)
+        uri = URI.parse(manifest_url)
 
-        manifest_json = if response.is_a?(Net::HTTPSuccess)
-                          response.body
-                        else
-                          # :nocov:
-                          raise "Could not get manifest from #{url}: " \
-                                "#{response.code} #{response.message}"
-                          # :nocov:
-                        end
+        net_http = Net::HTTP.new(uri.host, uri.port).tap do |http|
+          http.use_ssl = uri.scheme == "https"
+          http.read_timeout = ENV["FOOBARA_HTTP_MANIFEST_TIMEOUT"]&.to_i || 30
+        end
+
+        request = Net::HTTP::Get.new(uri.request_uri, load_manifest_headers)
+        response = net_http.request(request)
+
+        unless response.is_a?(Net::HTTPSuccess)
+          # :nocov:
+          raise "Could not get manifest from #{manifest_url}: " \
+                "#{response.code} #{response.message}"
+          # :nocov:
+        end
+        manifest_json = response.body
 
         JSON.parse(manifest_json)
+      end
+
+      def load_manifest_headers
+        { "Content-Type" => "application/json" }
       end
 
       # TODO: feels like a command smell to pass manifests here... reconsider algorithm
