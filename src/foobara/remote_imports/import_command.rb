@@ -74,7 +74,11 @@ module Foobara
       end
 
       def build_command
-        url_base = root_manifest.metadata["url"].gsub(/\/manifest$/, "")
+        url_base = root_manifest.metadata["url"]
+        url_base = URI.parse(url_base)
+        url_base = URI::Generic.new(url_base.scheme, url_base.userinfo, url_base.host, url_base.port,
+                                    nil, nil, nil, nil, nil)
+        url_base = url_base.to_s
 
         domain = Namespace.global.foobara_lookup_domain!(
           manifest_to_import.domain.scoped_full_path,
