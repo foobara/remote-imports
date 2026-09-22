@@ -72,9 +72,9 @@ module Foobara
 
           model_base_class = declaration_data["model_base_class"]
           unless model_base_class == "Foobara::Entity"
-            # :nocov:
+            # simplecov:disable
             raise "Expected model base class to be Foobara::Entity, but was #{model_base_class}"
-            # :nocov:
+            # simplecov:enable
           end
 
           declaration_data["model_base_class"] = "Foobara::DetachedEntity"
