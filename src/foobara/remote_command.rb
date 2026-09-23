@@ -58,9 +58,9 @@ module Foobara
     def cast_and_validate_inputs
       @inputs = if inputs_type.nil? && (raw_inputs.nil? || raw_inputs.empty?)
                   # TODO: test this path
-                  # :nocov:
+                  # simplecov:disable
                   {}
-                  # :nocov:
+                  # simplecov:enable
                 else
                   serializer_class = CommandConnectors::Serializers::EntitiesToPrimaryKeysSerializer
                   serializer = serializer_class.new(detached_to_primary_key: true)
@@ -138,17 +138,17 @@ module Foobara
               path: error["path"]
             )
           else
-            # :nocov:
+            # simplecov:disable
             raise "Bad error category: #{error["category"]}"
-            # :nocov:
+            # simplecov:enable
           end
         end
 
         halt!
       else
-        # :nocov:
+        # simplecov:disable
         raise UnexpectedError, "#{response.code} from #{url}: #{response.body}"
-        # :nocov:
+        # simplecov:enable
       end
     end
   end

@@ -5,8 +5,8 @@ module Foobara
     class << self
       attr_accessor :auth_header_name, :auth_header_value
 
-      def subclass(auth_header:, **opts)
-        super(base: AuthenticatedRemoteCommand, **opts).tap do |klass|
+      def subclass(auth_header:, **)
+        super(base: AuthenticatedRemoteCommand, **).tap do |klass|
           klass.auth_header_name = auth_header[0]
           klass.auth_header_value = auth_header[1]
         end

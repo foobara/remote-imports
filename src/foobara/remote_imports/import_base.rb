@@ -107,10 +107,10 @@ module Foobara
         response = net_http.request(request)
 
         unless response.is_a?(Net::HTTPSuccess)
-          # :nocov:
+          # simplecov:disable
           raise "Could not get manifest from #{manifest_url}: " \
                 "#{response.code} #{response.message}"
-          # :nocov:
+          # simplecov:enable
         end
         manifest_json = response.body
 
@@ -195,9 +195,9 @@ module Foobara
       end
 
       def find_manifests_to_import
-        # :nocov:
+        # simplecov:disable
         raise "subclass responsibility"
-        # :nocov:
+        # simplecov:enable
       end
 
       def import_objects_from_manifests
@@ -214,9 +214,9 @@ module Foobara
       end
 
       def import_object_from_manifest
-        # :nocov:
+        # simplecov:disable
         raise "subclass responsibility"
-        # :nocov:
+        # simplecov:enable
       end
 
       def imported_objects

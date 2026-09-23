@@ -44,9 +44,9 @@ module Foobara
         base_error = if base_error_name
                        Foobara.foobara_root_namespace.foobara_lookup_error!(base_error_name)
                      else
-                       # :nocov:
+                       # simplecov:disable
                        Foobara::Error
-                       # :nocov:
+                       # simplecov:enable
                      end
 
         Foobara::Error.subclass(
