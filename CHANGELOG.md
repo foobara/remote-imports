@@ -1,3 +1,7 @@
+## [1.2.1] - 2026-10-10
+
+- Fix an annoying deprecation warning
+
 ## [1.2.0] - 2025-10-29
 
 - Support auth to get the manifest itself when needed
